@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TheMarvelVault</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+  <script type="module" src="main.js"></script>
+</head> 
+  <body>
+  <header class="header">
+  <div class="nav-container">
+    <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+    <a href="index.html"><img src="https://i.ibb.co/SqpB2T5/themarvelvault1.png" alt="TheMarvelVault Logo" class="logo" /></a>
+    <nav class="nav-links">
+       <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+      <a href="characters.html">CHARACTERS</a>
+      <a href="news.html">NEWS</a>
+      <a href="tvshows.html">TV SHOWS</a>
+      <a href="movies.html">MOVIES</a>
+      <a href="about.html">ABOUT</a>
+    </nav>
+    <div class="nav-tools">
+      <a href="search.html" class="search-icon-button"><i class="fas fa-search"></i></a>
+      <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</header>
+<div id="search-results"></div>
+  <!-- Section 1: Hero Banner / News Panel -->
+
+  <section class="hero">
+    <div class="hero-content">
+      <img src="https://i.ibb.co/0RsnLknc/thunderbolts-lob-mas-mob-03-0.jpg" alt="Thunderbolts Poster" class="hero-img">
+      <div class="hero-text">
+        <h1>Not super. Not heroes. Not giving up.</h1>
+        <h1>Marvel Studios' new film is out in theaters now.</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Movie Cards -->
+  <section class="movies">
+    <h2>Latest Marvel Movies</h2>
+    <div class="movie-grid">
+      <div class="movie-card featured-movie-card">
+        <img src="https://i.ibb.co/BHCrFhXh/thefantasticfourfirststeps-lob-crd-03.jpg" alt="Fantastic 4">
+        <div class="movie-info">
+          <p class="movie-title">The Fantastic Four: First Steps</p>
+          <p class="movie-date">2025</p>
+        </div>
+      </div>
+      <div class="movie-card featured-movie-card">
+        <img src="https://i.ibb.co/M5gCLMTV/thenewavengers-lob-crd-01.jpg" alt="The New Avengers">
+        <div class="movie-info">
+          <p class="movie-title">The New Avengers</p>
+          <p class="movie-date">2025</p>
+        </div>
+      </div>
+      <div class="movie-card featured-movie-card">
+        <img src="https://i.ibb.co/hRz7P7ZZ/captainamericabravenewworld-lob-crd-05.jpg" alt="Captain America">
+        <div class="movie-info">
+          <p class="movie-title">Captain America: Brave New World</p>
+          <p class="movie-date">2025</p>
+        </div>
+      </div>
+      <div class="movie-card featured-movie-card">
+        <img src="https://i.ibb.co/DPTktKB0/deadpoolandwolverine-lob-crd-03.jpg" alt="Deadpool & Wolverine">
+        <div class="movie-info">
+          <p class="movie-title">Deadpool & Wolverine</p>
+          <p class="movie-date">2024</p>
+        </div>
+      </div>
+      <div class="movie-card featured-movie-card">
+        <img src="https://i.ibb.co/fdDWcKdX/themarvels-lob-crd-05.jpg" alt="The Marvels">
+        <div class="movie-info">
+          <p class="movie-title">The Marvels</p>
+          <p class="movie-date">2023</p>
+        </div>
+      </div>
+      <div class="movie-card featured-movie-card">
+        <img src="https://i.ibb.co/93dQX7Gy/guardiansofthegalaxyvolume3-lob-crd-03.jpg" alt="Guardians 3">
+        <div class="movie-info">
+          <p class="movie-title">Guardians of the Galaxy Vol. 3</p>
+          <p class="movie-date">2023</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Recent Blog Posts -->
+  <section class="blog-posts">
+    <h2>Latest News</h2>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <img src="https://i.ibb.co/d7L3Y8J/marvel-news-1.jpg" alt="News 1">
+        <h3>What’s Next for the Multiverse Saga?</h3>
+      </div>
+      <div class="blog-card">
+        <img src="https://i.ibb.co/N3Gx9J3/marvel-news-2.jpg" alt="News 2">
+        <h3>Deadpool Meets Wolverine: A New Era</h3>
+      </div>
+      <div class="blog-card">
+        <img src="https://i.ibb.co/fYgvjDL/marvel-news-3.jpg" alt="News 3">
+        <h3>Marvel's Phase 5: Full Breakdown</h3>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 TheMarvelVault. All rights reserved.</p>
+  </footer>
+</body>
+</html>

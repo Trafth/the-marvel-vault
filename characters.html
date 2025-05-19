@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TheMarvelVault - Characters</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <header class="header">
+  <div class="nav-container">
+    <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+    <a href="index.html"><img src="https://i.ibb.co/SqpB2T5/themarvelvault1.png" alt="TheMarvelVault Logo" class="logo" /></a>
+    <nav class="nav-links">
+       <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+      <a href="characters.html">CHARACTERS</a>
+      <a href="news.html">NEWS</a>
+      <a href="tvshows.html">TV SHOWS</a>
+      <a href="movies.html">MOVIES</a>
+      <a href="about.html">ABOUT</a>
+    </nav>
+    <div class="nav-tools">
+      <a href="search.html" class="search-icon-button"><i class="fas fa-search"></i></a>
+      <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</header>
+<div id="search-results"></div>
+
+  <main>
+    <section class="characters-hero" style="background-image: url('https://i.ibb.co/k30gR4S/characters-hero.jpg'); background-size: cover; background-position: center;">
+      <div class="characters-hero-content">
+        <div class="characters-hero-text">
+          <h1>MARVEL CHARACTERS</h1>
+          <p>Discover the diverse heroes, villains, and extraordinary beings from the Marvel Universe.</p>
+        </div>
+      </div>
+    </section>
+
+      <div class="marvel-characters-section">
+        <h2>MARVEL CHARACTERS</h2>
+        <div class="character-list">
+          <div class="character-item">
+            <img src="https://i.ibb.co/C3wDH0jw/image.png" alt="Character Image">
+            <p class="character-title">Character Name 1</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/mH3RzP2/character2.jpg" alt="Character Image">
+            <p class="character-title">Character Name 2</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/rp8w54m/character3.jpg" alt="Character Image">
+            <p class="character-title">Character Name 3</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/pLwN35P/character4.jpg" alt="Character Image">
+            <p class="character-title">Character Name 4</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/0Y30zT5/character5.jpg" alt="Character Image">
+            <p class="character-title">Character Name 5</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/yX9f30m/character6.jpg" alt="Character Image">
+            <p class="character-title">Character Name 6</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/vD2Z0g9/character7.jpg" alt="Character Image">
+            <p class="character-title">Character Name 7</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/JdG1x77/character8.jpg" alt="Character Image">
+            <p class="character-title">Character Name 8</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/P55Rj1J/character9.jpg" alt="Character Image">
+            <p class="character-title">Character Name 9</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/Mnp10g6/character10.jpg" alt="Character Image">
+            <p class="character-title">Character Name 10</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/ZLWVb02/character11.jpg" alt="Character Image">
+            <p class="character-title">Character Name 11</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/pLwN35P/character4.jpg" alt="Character Image">
+            <p class="character-title">Character Name 12</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+            <div class="character-item">
+            <img src="https://i.ibb.co/XJJgWc4/character1.jpg" alt="Character Image">
+            <p class="character-title">Character Name 1</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/mH3RzP2/character2.jpg" alt="Character Image">
+            <p class="character-title">Character Name 2</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/rp8w54m/character3.jpg" alt="Character Image">
+            <p class="character-title">Character Name 3</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/pLwN35P/character4.jpg" alt="Character Image">
+            <p class="character-title">Character Name 4</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/0Y30zT5/character5.jpg" alt="Character Image">
+            <p class="character-title">Character Name 5</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/yX9f30m/character6.jpg" alt="Character Image">
+            <p class="character-title">Character Name 6</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/vD2Z0g9/character7.jpg" alt="Character Image">
+            <p class="character-title">Character Name 7</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/JdG1x77/character8.jpg" alt="Character Image">
+            <p class="character-title">Character Name 8</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/P55Rj1J/character9.jpg" alt="Character Image">
+            <p class="character-title">Character Name 9</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/Mnp10g6/character10.jpg" alt="Character Image">
+            <p class="character-title">Character Name 10</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/ZLWVb02/character11.jpg" alt="Character Image">
+            <p class="character-title">Character Name 11</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/pLwN35P/character4.jpg" alt="Character Image">
+            <p class="character-title">Character Name 12</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+        </div>
+        <button class="load-more">LOAD MORE</button>
+      </div>
+
+      <div class="other-characters-section">
+         <h2>OTHER CHARACTERS</h2>
+         <div class="character-list">
+          <div class="character-item">
+            <img src="https://i.ibb.co/XJJgWc4/character1.jpg" alt="Character Image">
+            <p class="character-title">Character Name A</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/mH3RzP2/character2.jpg" alt="Character Image">
+            <p class="character-title">Character Name B</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/rp8w54m/character3.jpg" alt="Character Image">
+            <p class="character-title">Character Name C</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/pLwN35P/character4.jpg" alt="Character Image">
+            <p class="character-title">Character Name D</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/0Y30zT5/character5.jpg" alt="Character Image">
+            <p class="character-title">Character Name E</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+           <div class="character-item">
+            <img src="https://i.ibb.co/yX9f30m/character6.jpg" alt="Character Image">
+            <p class="character-title">Character Name F</p>
+            <p class="character-series">Series/Affiliation</p>
+          </div>
+         </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 TheMarvelVault. All rights reserved.</p>
+  </footer>
+</body>
+</html>

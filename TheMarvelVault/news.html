@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TheMarvelVault - News</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <header class="header">
+  <div class="nav-container">
+    <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+    <a href="index.html"><img src="https://i.ibb.co/SqpB2T5/themarvelvault1.png" alt="TheMarvelVault Logo" class="logo" /></a>
+    <nav class="nav-links">
+       <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+      <a href="characters.html">CHARACTERS</a>
+      <a href="news.html">NEWS</a>
+      <a href="tvshows.html">TV SHOWS</a>
+      <a href="movies.html">MOVIES</a>
+      <a href="about.html">ABOUT</a>
+    </nav>
+    <div class="nav-tools">
+      <a href="search.html" class="search-icon-button"><i class="fas fa-search"></i></a>
+      <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="news-page-container">
+    <div class="news-header">
+        <h1>MARVEL NEWS</h1>
+    </div>
+
+    <div class="latest-news-section news-section">
+        <h2>LATEST MOVIES NEWS</h2>
+        <div class="news-articles">
+            <div class="news-article">
+                <img src="https://i.ibb.co/z74X8jC/news1.jpg" alt="News Article 1">
+                <p class="article-date">DECEMBER 10, 2023</p>
+                <p class="article-title">'The Marvels' Directors on the Film's "Joyful" Tone</p>
+            </div>
+            <div class="news-article">
+                <img src="https://i.ibb.co/NmxZgKx/news2.jpg" alt="News Article 2">
+                <p class="article-date">DECEMBER 9, 2023</p>
+                <p class="article-title">Loki and Sylvie Face a New Threat in 'Loki' Season 2</p>
+            </div>
+            <div class="news-article">
+                <img src="https://i.ibb.co/F3H7Vv3/news3.jpg" alt="News Article 3">
+                <p class="article-date">DECEMBER 8, 2023</p>
+                <p class="article-title">Daredevil: Born Again Adds Margarita Levieva to Cast</p>
+            </div>
+            <div class="news-article">
+                <img src="https://i.ibb.co/P65C9cQ/news4.jpg" alt="News Article 4">
+                <p class="article-date">DECEMBER 7, 2023</p>
+                <p class="article-title">'What If...?' Season 2 Trailer Teases New Multiversal Adventures</p>
+            </div>
+        </div>
+        <div class="pagination">
+            <a href="#"><i class="fas fa-angle-left"></i></a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#"><i class="fas fa-angle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="latest-tv-shows-news-section">
+        <h2>LATEST TV SHOW NEWS</h2>
+        <div class="news-articles">
+            <div class="news-article">
+                <img src="https://i.ibb.co/L58C3z6/tv1.jpg" alt="TV Show Article 1">
+                <p class="article-date">DECEMBER 10, 2023</p>
+                <p class="article-title">'Echo' Trailer Reveals gritty new look at Maya Lopez</p>
+            </div>
+            <div class="news-article">
+                <img src="https://i.ibb.co/4pBqXbW/tv2.jpg" alt="TV Show Article 2">
+                <p class="article-date">DECEMBER 9, 2023</p>
+                <p class="article-title">'Agatha: Darkhold Diaries' Set to Premiere in 2024</p>
+            </div>
+            <div class="news-article">
+                <img src="https://i.ibb.co/b7F3t53/tv3.jpg" alt="TV Show Article 3">
+                <p class="article-date">DECEMBER 8, 2023</p>
+                <p class="article-title">'X-Men '97' Reveals First Look and Release Window</p>
+            </div>
+            <div class="news-article">
+                <img src="https://i.ibb.co/q5d1r12/tv4.jpg" alt="TV Show Article 4">
+                <p class="article-date">DECEMBER 7, 2023</p>
+                <p class="article-title">New 'Daredevil: Born Again' Details Emerge From Set</p>
+            </div>
+        </div>
+         <div class="pagination">
+            <a href="#"><i class="fas fa-angle-left"></i></a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#"><i class="fas fa-angle-right"></i></a>
+        </div>
+    </div>
+
+</div>
+
+  <footer class="footer">
+    <p>&copy; 2025 TheMarvelVault. All rights reserved.</p>
+  </footer>
+
+
+</body>
+</html>

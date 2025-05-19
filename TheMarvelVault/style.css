@@ -1,0 +1,994 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    color: #fff;
+}
+
+.header {
+    background-color: #0d0d0d;
+    padding: 1rem;
+    border-bottom: 2px solid #e62429;
+    font-family: 'Roboto', sans-serif;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative; /* Needed for absolute positioning of mobile menu */
+}
+
+.logo {
+    height: 50px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for mobile menu */
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #e62429;
+}
+
+.nav-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.search-icon-button, .theme-toggle, .mobile-menu-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem; /* Increased size for touch */
+    cursor: pointer;
+    padding: 0.5rem; /* Increased padding for touch */
+}
+
+/* Hide by default and show only on mobile */
+.mobile-menu-toggle {
+    display: none;
+}
+
+.search-icon-button:hover, .theme-toggle:hover, .mobile-menu-toggle:hover {
+    color: #e62429;
+}
+
+/* Styles for the search page content */
+.search-page-content {
+    display: flex;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.search-section {
+    flex-grow: 1;
+    min-width: 300px; /* Ensure it takes up reasonable space */
+}
+
+.search-input-area {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+
+.search-input-area i {
+    font-size: 1.5rem;
+}
+
+.search-input-area h2 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.search-filters {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.search-filters .filter-link {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: bold;
+    padding-bottom: 0.25rem;
+}
+
+.search-filters .filter-link.active,
+.search-filters .filter-link:hover {
+    color: #e62429;
+    border-bottom: 2px solid #e62429;
+}
+
+.search-results-area {
+    margin-top: 1.5rem;
+}
+
+.search-results-area ul {
+    list-style: none;
+    padding: 0;
+}
+
+.search-results-area li {
+    background-color: #1a1a1a;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+}
+
+/* Styles for the search results grid */
+.results-grid {
+ display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid columns */
+  gap: 1.5rem; /* Gap between grid items */
+  margin-top: 1.5rem;
+}
+
+.result-item {
+ background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 1rem; /* Add padding around content */
+  display: flex;
+  align-items: center; /* Vertically center items */
+  gap: 1rem; /* Space between image and info */
+}
+
+.result-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.result-item img {
+    width: 100px; /* Set a fixed width for the image */
+    height: auto;
+    object-fit: cover; /* Ensure image covers the space without distortion */
+    border-radius: 4px; /* Slightly rounded corners for images */
+}
+
+.result-item .result-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0; /* Adjust margins */
+}
+
+.result-item .result-description {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin: 0; /* Adjust margins */
+}
+.hype-box {
+    width: 300px;
+    background-color: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem; /* Adjust top margin for smaller screens */
+}
+
+.hype-box-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.hype-box-corner {
+    width: 20px;
+    height: 20px;
+    border-top: 3px solid #ffc107;
+    border-left: 3px solid #ffc107;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+.hype-box h3 {
+    margin: 0;
+    color: #ffc107;
+}
+
+.hype-box p {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+.hype-box-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+}
+
+.hype-box-item img {
+    width: 80px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.hype-box-item-text h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: #e62429;
+}
+
+.hype-box-item-text p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+
+
+/* movies section */
+.top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1rem; /* Increased padding for better spacing */
+    min-height: 60vh; /* Reduced height slightly */
+    background-color: #1c1c1c;
+    position: relative;
+    overflow: hidden;
+    text-align: center; /* Center text by default */
+}
+
+.top-content {
+    max-width: 1200px;
+    width: 100%;
+    padding: 2rem; /* Added padding to content */
+    background: rgba(0, 0, 0, 0.5); /* Added a subtle background overlay for text readability */
+    border-radius: 10px; /* Rounded corners for the overlay */
+}
+
+.top-text h1 {
+    font-size: 3rem; /* Increased font size for the main heading */
+    margin: 0 0 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Added text shadow */
+}
+
+.top-text p {
+    font-size: 1.2rem; /* Increased font size for the paragraph */
+    color: #ccc;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Added text shadow */
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    min-height: 100vh;
+    background-color: #1c1c1c;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    background: linear-gradient(to right, transparent 70%, rgba(0, 0, 0, 0.7) 100%); /* Gradient for shadow effect */
+}
+
+.hero-image {
+    width: 70%;
+    height: auto;
+    display: block;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.hero-text {
+    width: 30%;
+    padding: 2rem;
+    text-align: left;
+    color: #fff;
+    position: static;
+    bottom: auto;
+    left: auto;
+    z-index: auto;
+    text-shadow: none;
+}
+
+.hero-text h1 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+}
+
+.hero-text p {
+    font-size: 1rem;
+    color: #ccc;
+    margin: 0;
+}
+
+/* Movie Grid Section */
+.movies {
+    padding: 2rem;
+    background-color: #1a1a1a;
+    text-align: center;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.movie-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.movie-card .movie-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+
+}.movie-card .movie-date {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-top: 0.2rem;
+}
+
+
+/* Blog Section */
+.blog-posts {
+    padding: 2rem;
+    background-color: #222;
+    text-align: center;
+}
+
+.blog-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.blog-card {
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 300px;
+    text-align: left;
+}
+
+.blog-card img {
+    width: 100%;
+    display: block;
+}
+
+.blog-card h3 {
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+/* Footer */
+.footer {
+    padding: 1rem;
+    text-align: center;
+    background-color: #000;
+    font-size: 0.9rem;
+}
+
+/* Movie Detail Page Styles */
+.movie-detail-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.movie-hero-section {
+    position: relative;
+    height: 400px; /* Adjust as needed */
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.movie-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5); /* Darken the background image */
+    z-index: 0;
+}
+
+.movie-hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    height: 100%;
+}
+
+.movie-poster {
+    width: 200px; /* Adjust poster width */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin-right: 2rem;
+}
+
+.movie-info {
+    color: #fff;
+}
+
+.movie-info h1 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+}
+
+.movie-info p {
+    font-size: 1rem;
+    color: #ccc;
+    margin: 0 0 0.5rem 0;
+}
+
+.movie-trailer-section,
+.movie-overview-section,
+.movie-gallery-section {
+    margin-bottom: 2rem;
+}
+
+.movie-trailer-section h2,
+.movie-overview-section h2,
+.movie-gallery-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #e62429;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.movie-trailer-video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.movie-trailer-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.movie-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.movie-gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer; /* Indicate clickable images */
+}
+.mobile-menu-close {
+        display: none !important;
+      }
+
+/* Responsive Styles */
+@media (max-width: 818px) {
+    /* Style the close button */
+    .mobile-menu-close {
+      display: block !important;
+      position: absolute !important;
+      top: 10px !important;
+      right: 10px !important;
+      background: none !important;
+      border: none !important;
+      color: #fff !important;
+      font-size: 1.5rem !important;
+      cursor: pointer !important;
+      z-index: 1200 !important;
+    }
+
+    .nav-links {
+        flex-direction: column !important;
+        background-color: #0d0d0d !important;
+        position: fixed !important; /* Changed to fixed */
+        top: 0 !important;
+        left: 0 !important;
+        width: 70% !important; /* Set a width for the sidebar */
+        max-width: 250px !important; /* Max width for larger mobile devices */
+        height: 100% !important; /* Full height */
+        overflow-y: auto !important; /* Enable scrolling if links exceed height */
+        padding: 60px 1rem 1rem 1rem !important; /* Adjust padding for header and content */
+        z-index: 1050 !important; /* Ensure it's above most content but below header */
+        transform: translateX(-100%) !important; /* Start off-screen */
+        transition: transform 0.3s ease-in-out !important; /* Smooth transition */
+        box-shadow: 3px 0 5px rgba(0, 0, 0, 0.5) !important; /* Add a shadow */
+         touch-action: pan-y !important;
+
+    
+        
+
+    }
+
+    .nav-links.active {
+        transform: translateX(0) !important; /* Slide into view */
+       
+
+    }
+
+     .nav-links a {
+        padding: 0.75rem 0 !important; /* Adjust padding */
+        border-bottom: 1px solid #333 !important;
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none !important;
+    }
+
+     .mobile-menu-toggle {
+        display: block !important; /* Show mobile menu toggle */
+         /* Ensure toggle is above mobile menu */
+    }
+
+    .nav-container {
+        flex-wrap: nowrap !important;
+    }
+
+    .nav-tools {
+        gap: 0.5rem !important;
+    }
+
+    .logo {
+        height: 40px !important; /* Slightly smaller logo on mobile */
+    }
+
+    .search-page-content {
+        flex-direction: column !important;
+    }
+
+    .hype-box {
+        width: 100% !important;
+        margin-top: 1rem !important;
+    }
+
+    .search-section {
+        min-width: unset !important;
+        width: 100% !important;
+    }
+
+    .hero-content {
+        flex-direction: column !important;
+        background: none !important;
+    }
+
+    .hero-img {
+        width: 100% !important;
+    }
+
+    .hero-text {
+        width: 100% !important;
+        padding: 1rem !important;
+        text-align: center !important;
+    }
+
+    .hero-text h1 {
+        font-size: 1.2rem !important;
+    }
+
+    .hero-text p {
+        font-size: 0.9rem !important;
+    }
+
+     .news-header {
+        min-height: 40vh !important;
+        font-size: 1.5em !important;
+    }
+}
+
+.news-header {
+    background-image: url('https://i.ibb.co/v6v2ThBP/image.png');
+    background-size: cover;
+    background-position: center;
+    height: 100px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1rem;
+    min-height: 60vh;
+    background-color: #1c1c1c;
+    color: hsl(0, 0%, 100%);
+    text-shadow: 2px 2px 10px rgba(5, 5, 5, 30);
+    font-size: 2em;
+    text-align: center;
+}
+
+.news-header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.news-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.latest-news-section, .marvel-movies-section, .other-movies-section, .music-playlist-section, .unlock-universe-section, .tv-shows-grid-section, .latest-tv-shows-news-section, .movies {
+    margin-bottom: 3rem;
+}
+.movies h2,
+.latest-tv-shows-news-section h2,
+.tv-shows-grid-section h2,
+.latest-news-section h2,
+.marvel-movies-section h2,
+.other-movies-section h2,
+.music-playlist-section h2,
+.latest-characters-section h2,
+.marvel-characters-section h2,
+.other-characters-section h2
+{
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #e62429;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.news-articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.news-article {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-article img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.news-article .article-date {
+    font-size: 0.8rem;
+    color: #ccc;
+    margin: 1rem 1rem 0.5rem 1rem;
+}
+
+.news-article .article-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0 1rem 1rem 1rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 0.5rem;
+}
+
+.pagination a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+.pagination a:hover,
+.pagination a.active {
+    background-color: #e62429;
+    border-color: #e62429;
+}
+
+.movie-item, .character-item {
+    text-align: center;
+}
+
+.movie-item img, .character-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.movie-item .movie-title, .character-item .character-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.movie-item .movie-year, .character-item .character-series {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-top: 0.2rem;
+}
+
+.load-more {
+    display: block;
+    margin: 2rem auto 0 auto;
+    background-color: #e62429;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.unlock-universe-text button:hover {
+    background-color: #d41f24;
+}
+
+/* Responsive adjustments for news page */
+@media (max-width: 768px) {
+    .news-page-container, .characters-page-container {
+        padding: 1rem;
+    }
+
+    .latest-characters-section h2, .marvel-characters-section h2, .other-characters-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .news-articles {
+        grid-template-columns: 1fr;
+    }
+
+    .movie-list, .character-list {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .movie-item .movie-title, .character-item .character-title {
+        font-size: 0.9rem;
+    }
+
+    .movie-item .movie-year, .character-item .character-series {
+        font-size: 0.8rem;
+    }
+
+    .load-more {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .unlock-universe-text p:last-of-type {
+        font-size: 0.9rem;
+    }
+
+    .unlock-universe-text button {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+}
+
+/* New Styles for Characters Page */
+.characters-hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1rem;
+    min-height: 60vh;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+}
+
+.characters-hero-content {
+    max-width: 1200px;
+    width: 100%;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.characters-hero-text h1 {
+    font-size: 3rem;
+    margin: 0 0 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.characters-hero-text p {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.characters-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+
+.character-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.character-item {
+    text-align: center;
+}
+
+.character-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.character-item .character-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.character-item .character-series {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-top: 0.2rem;
+}
+
+
+/* About Page Styles */
+.about-hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1rem;
+    min-height: 40vh;
+    background-color: #1c1c1c;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+}
+
+.about-hero-content {
+    max-width: 1200px;
+    width: 100%;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.about-hero-text h1 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.about-hero-text p {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.about-section-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.about-section-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #e62429;
+}
+
+.about-item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.about-item {
+    text-align: center;
+}
+
+.about-item img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.about-item h3 {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+.about-item p {
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.about-cta-button {
+    background-color: #e62429;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.about-cta-button:hover {
+    background-color: #d41f24;
+}
+.tv-shows-grid-section {
+    padding: 2rem;
+    background-color: #1a1a1a;
+    text-align: center;
+}
+
+.tv-show-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.tv-show-item {
+    text-align: center;
+}
+
+.tv-show-item img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.tv-show-item .tv-show-title {
+    margin-top: 0.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.tv-show-item .tv-show-release {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-top: 0.2rem;
+}

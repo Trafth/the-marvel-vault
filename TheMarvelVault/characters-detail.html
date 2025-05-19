@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Detail - TheMarvelVault</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+            <a href="index.html"><img src="https://i.ibb.co/SqpB2T5/themarvelvault1.png" alt="TheMarvelVault Logo" class="logo" /></a>
+            <nav class="nav-links">
+                <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+                <a href="characters.html">CHARACTERS</a>
+                <a href="news.html">NEWS</a>
+                <a href="tvshows.html">TV SHOWS</a>
+                <a href="movies.html">MOVIES</a>
+                <a href="about.html">ABOUT</a>
+            </nav>
+            <div class="nav-tools">
+                <a href="search.html" class="search-icon-button"><i class="fas fa-search"></i></a>
+                <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="movie-detail-container">
+        <section class="hero-section">
+            <!-- Hero image will be populated here -->
+        </section>
+
+        <section class="overview">
+            <div class="overview-details">
+                <h2>OVERVIEW</h2>
+                <p id="character-description">Character description goes here</p>
+            </div>
+            <img id="overview-poster" src="" alt="Character Poster">
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 TheMarvelVault. All rights reserved.</p>
+    </footer>
+</body>
+</html>

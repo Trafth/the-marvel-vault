@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search - TheMarvelVault</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+  <script type="module" src="main.js"></script>
+  <script type="module" src="firebase-config.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="nav-container">
+      <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+      <a href="index.html"><img src="https://i.ibb.co/SqpB2T5/themarvelvault1.png" alt="TheMarvelVault Logo" class="logo" /></a>
+      <nav class="nav-links">
+        <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+        <a href="characters.html">CHARACTERS</a>
+        <a href="news.html">NEWS</a>
+        <a href="tvshows.html">TV SHOWS</a>
+        <a href="movies.html">MOVIES</a>
+        <a href="about.html">ABOUT</a>
+      </nav>
+      <div class="nav-tools">
+        <a href="search.html" class="search-icon-button"><i class="fas fa-search"></i></a>
+        <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="search-page-content">
+    <section class="search-section">
+      <div class="search-area">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="SEARCH">
+        <button>Search</button>
+      </div>
+
+      <div class="category-grid">
+        <a href="#" class="category-item" data-category="all">ALL</a>
+        <a href="#" class="category-item" data-category="characters">CHARACTERS</a>
+        <a href="#" class="category-item" data-category="movies">MOVIES</a>
+        <a href="#" class="category-item" data-category="tvshows">TV SHOWS</a>
+        <a href="#" class="category-item" data-category="news">NEWS</a>
+      </div>
+
+      <div class="search-results-area">
+        <div class="results-grid">
+          <p>Start typing to search or select a category.</p>
+        </div>
+      </div>
+    </section>
+
+    <aside class="hype-box">
+      <div class="hype-box-header">
+        <div class="hype-box-corner"></div>
+        <h3>Vault Highlights</h3>
+      </div>
+      <p>Can't-miss news and updates from across the Marvel Universe!</p>
+      <div class="hype-box-item">
+        <img src="https://i.ibb.co/0RsnLknc/thunderbolts-lob-mas-mob-03-0.jpg" alt="Thunderbolts image">
+        <div class="hype-box-item-text">
+          <h4>MOVIES</h4>
+          <p>Meet the 'Thunderbolts'*: Go Behind the Scenes of Marvel Studios' Action Epic</p>
+        </div>
+      </div>
+      <!-- More hype box items can be added here -->
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 TheMarvelVault. All rights reserved.</p>
+  </footer>
+</body>
+</html>

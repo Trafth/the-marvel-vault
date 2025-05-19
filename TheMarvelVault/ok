@@ -1,0 +1,171 @@
+console.log('main.js loaded');
+import { db } from './firebase-config.js'; // Keep the import
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  if (window.location.pathname.includes('movie-detail.html')) {
+    console.log('Entered movie-detail.html block');
+
+    const movieDetailContainer = document.querySelector('.movie-detail-container');
+
+    console.log('movieDetailContainer:', movieDetailContainer);
+
+    if (movieDetailContainer) {
+      // Get the movie ID from the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const movieId = urlParams.get('id');
+
+      console.log('movieId:', movieId);
+
+      if (movieId) {
+        // Fetch the movie data from Firestore
+        if (typeof db !== 'undefined') {
+          fetchMovieData(movieId); // Call the function to fetch and display data
+        } else {
+          console.error("Firestore is not initialized.");
+        }
+      } else {
+        console.error("No movie ID found in URL parameter.");
+        // Display an error message on the page
+        movieDetailContainer.innerHTML = '<p>Movie not found.</p>';
+      }
+    } else {
+      console.error("Movie detail container not found.");
+    }
+  }
+});
+
+// Temporarily comment out or remove ALL other code below this point,
+// including the admin page and search page code blocks and their listeners.
+// Ensure you save this simplified version of main.js
+
+// Function to fetch and display movie data
+async function fetchMovieData(movieId) {
+  try {
+    const movieRef = db.collection('movies').doc(movieId);
+    const doc = await movieRef.get();
+
+    if (doc.exists) {
+      const movieData = doc.data();
+      console.log("Movie data fetched:", movieData);
+
+      // Populate the hero section
+      const heroBackground = document.querySelector('.hero-section'); // Assuming hero-section is the container for background image
+
+      // Select elements based on the structure created in movie-detail.html
+      const overviewTitleElement = document.querySelector('.overview h2'); // Assuming h2 in overview for "OVERVIEW" title
+      const movieOverviewTextElement = document.querySelector('#movie-synopsis'); // Example selector for the overview description
+      const executiveProducersElement = document.getElementById('executive-producers'); // Assuming element with ID 'executive-producers'
+      const producerElement = document.getElementById('producer'); // Assuming element with ID 'producer'
+      const coProducerElement = document.getElementById('co-producer'); // Assuming element with ID 'co-producer'
+      const directorElement = document.getElementById('director'); // Assuming element with ID 'director'
+      const castElement = document.getElementById('cast'); // Assuming element with ID 'cast'
+      const musicByElement = document.getElementById('music-by'); // Assuming element with ID 'music-by'
+      const movieReleaseYearElement = document.getElementById('movie-release-year'); // Example: Assuming release year is the first paragraph in overview-details
+      const movieTrailerVideoElement = document.getElementById('movie-trailer'); // Example selector for the trailer video element
+      const moviePosterElement = document.getElementById('overview-poster'); // Example selector for the smaller poster in the overview
+
+      // Populate the elements with fetched data
+      if (heroBackground && movieData.heroImageUrl) {
+        heroBackground.style.backgroundImage = `url(${movieData.heroImageUrl || ''})`;
+        heroBackground.style.backgroundSize = 'cover';
+        heroBackground.style.backgroundPosition = 'center';
+      }
+
+      if (movieOverviewTextElement) movieOverviewTextElement.textContent = movieData.synopsis || ''; // Assuming synopsis field for overview text. Selector changed to #movie-synopsis
+      if (overviewTitleElement) overviewTitleElement.textContent = 'OVERVIEW'; // Static text for the overview title
+
+      // Populate the release year (adjust selector if needed)
+      if (movieReleaseYearElement) {
+        // You might need to format this depending on how you want to display it
+        movieReleaseYearElement.textContent = `Release Year: ${movieData.releaseYear}` || 'Release Year not available';
+      }
+
+      // Populate executive producers, producer, co-producer
+      if (executiveProducersElement && movieData.executiveProducers) {
+        if (Array.isArray(movieData.executiveProducers)) {
+          executiveProducersElement.textContent = `EXECUTIVE PRODUCERS: ${movieData.executiveProducers.join(', ')}`;
+        } else {
+          executiveProducersElement.textContent = `EXECUTIVE PRODUCERS: ${movieData.executiveProducers}`;
+        }
+      }
+      if (producerElement && movieData.producer) {
+        producerElement.textContent = `PRODUCER: ${movieData.producer}`;
+      }
+      if (coProducerElement && movieData.coProducer) {
+        coProducerElement.textContent = `CO-PRODUCER: ${movieData.coProducer}`;
+      }
+
+      // Populate director, cast, music by
+      if (directorElement && movieData.director) {
+        directorElement.textContent = `Director: ${movieData.director}`; // Selector kept as #director
+      }
+
+      if (castElement && movieData.cast) {
+        if (Array.isArray(movieData.cast)) {
+          castElement.textContent = `Cast: ${movieData.cast.join(', ')}`;
+        } else {
+          castElement.textContent = `Cast: ${movieData.cast}`;
+        }
+      }
+      if (musicByElement && movieData.musicBy) {
+        musicByElement.textContent = `MUSIC BY: ${movieData.musicBy}`;
+      }
+
+
+      // Populate image (assuming URLs are in movieData)
+      if (moviePosterElement) moviePosterElement.src = movieData.imageUrl || 'placeholder.jpg'; // Use a placeholder image if none is available
+      // Assuming the smaller overview image is in the overviewImageUrl field
+      const overviewImageElement = document.getElementById('overview-poster'); // Assuming an img tag for the overview image
+      if (overviewImageElement && movieData.overviewImageUrl) {
+        overviewImageElement.src = movieData.overviewImageUrl;
+      }
+
+      // Populate trailer (assuming trailerUrl is a video embed URL or ID)
+      // This part is highly dependent on how you store trailer info.
+      // A common way is to store the YouTube video ID and embed it in an iframe.
+      // Assuming movieData.trailerUrl is a direct embed URL or YouTube ID for now:
+      const trailerIframe = document.getElementById('movie-trailer'); // Assuming trailer-video contains an iframe with id="movie-trailer"
+      if (trailerIframe && movieData.trailerUrl) {
+        // Basic check if it looks like a YouTube ID or a full embed URL
+        if (movieData.trailerUrl.includes('youtube.com/embed/')) {
+             trailerIframe.src = movieData.trailerUrl;
+        } else {
+            // Assume it's a YouTube ID and construct the embed URL
+            trailerIframe.src = `https://www.youtube.com/embed/${movieData.trailerUrl}`;
+        }
+
+      }
+
+        // Populate main title separately if needed (e.g., in a hero section)
+        const mainTitleElement = document.getElementById('movie-title'); // Assuming your main title element has this ID
+        if (mainTitleElement) {
+            mainTitleElement.textContent = movieData.title || '';
+        }
+
+        // Handle gallery images (assuming movieData.galleryImages is an array of URLs)
+        const galleryGrid = document.querySelector('.gallery-grid');
+        if (galleryGrid && movieData.galleryImages && Array.isArray(movieData.galleryImages)) {
+            galleryGrid.innerHTML = ''; // Clear existing placeholder images
+            movieData.galleryImages.forEach(imageUrl => {
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = 'Gallery Image';
+                galleryGrid.appendChild(img);
+            });
+        } else if (galleryGrid) {
+            galleryGrid.innerHTML = '<p>No gallery images available.</p>';
+        }
+
+
+    } else {
+      console.log("No such document!");
+      document.querySelector('.movie-detail-container').innerHTML = '<p>Movie not found.</p>'; // Display message if movie doesn't exist
+    }
+  } catch (error) {
+    console.error("Error fetching movie document:", error);
+    document.querySelector('.movie-detail-container').innerHTML = '<p>Error loading movie details.</p>'; // Display error message
+  }
+}

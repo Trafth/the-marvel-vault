@@ -41,10 +41,20 @@
 
         <section class="overview">
             <div class="overview-details">
-                <h2>OVERVIEW</h2>
-                <p id="character-description">Character description goes here</p>
+                <h2 id="character-title"></h2>
+                <p><strong></strong> <span id="character-alias"></span></p>
+                <p><strong></strong> <span id="character-name"></span></p>
+                <p><strong></strong> <span id="character-universe"></span></p>
+                <h3>Synopsis</h3>
+                <p id="character-synopsis"></p>
+                <!-- The character-description element seems to be a duplicate of synopsis in your JS, keeping it for now but it might be redundant. -->
+                <p id="character-description"></p>
             </div>
-            <img id="overview-poster" src="" alt="Character Poster">
+            <div class="overview-image">
+                <!-- imageUrl is likely the main character image -->
+                <img id="overview-poster" src="" alt="Character Image">
+                <!-- heroImageUrl is used for the hero section background -->
+            </div>
         </section>
     </main>
 

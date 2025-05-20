@@ -22,7 +22,6 @@
       <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
       <a href="index.html"><img src="https://i.ibb.co/SqpB2T5/themarvelvault1.png" alt="TheMarvelVault Logo" class="logo" /></a>
       <nav class="nav-links">
-         <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
         <a href="characters.html">CHARACTERS</a>
         <a href="news.html">NEWS</a>
         <a href="tvshows.html">TV SHOWS</a>
@@ -42,16 +41,16 @@
             <div class="hero-background">
                 <!-- Background image will be loaded here -->
             </div>
-            <div class="hero-content">
+            <div class="hero-content"></div>
                 <h1 id="movie-title"></h1>
                 <!-- Other hero elements if needed -->
-            </div>
+            
         </section>
 
         <section class="trailer-section">
             <h2>Official Trailer</h2>
             <div class="trailer-container">
- <iframe id="movie-trailer" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe id="movie-trailer" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
                 <!-- Trailer video will be embedded here -->
             </div>
         </section>
@@ -60,25 +59,29 @@
             <div class="overview-content">
                 <div class="overview-text">
                     <h2>Overview</h2>
-                    <p id="movie-synopsis"></p>
- <p id="movie-release-year"></p>
+                <p id="synopsis-text"></p>
                     <div id="movie-details">
-                        <!-- Director, cast, etc. will be loaded here -->
+ <p><strong id="director-label"></strong> <span id="director-name"></span></p>
+ <p><strong id="executive-producers-label"></strong> <span id="executive-producers-list"></span></p>
+ <p><strong id="producer-label"></strong> <span id="producer-name"></span></p>
+ <p><strong id="co-producer-label"></strong> <span id="co-producer-name"></span></p>
+ <p><strong id="music-by-label">Music By:</strong> <span id="music-by-name"></span></p>
+ <p><strong id="cast-label">Cast:</strong> <span id="cast-list"></span></p>
+ <p><strong id="release-year-label">Release Year:</strong> <span id="release-year-text"></span></p>
+
+ <!-- Placeholder for additional movie details if needed -->
+                    </div>
+ <div class="additional-details">
+ <!-- Release Date can be placed here if needed, or adjust layout -->
+ <p id="release-date-text"></p>
+
+ <!-- Add other fields if needed -->
+
                     </div>
                 </div>
                 <div class="overview-image">
                     <img id="overview-poster" src="" alt="Movie Poster">
                 </div>
-            </div>
-        </section>
-
-        <section class="gallery-section">
-            <h2>Gallery</h2>
-            <div class="gallery-grid">
- <img src="" alt="Gallery Image">
- <img src="" alt="Gallery Image">
- <img src="" alt="Gallery Image">
-                <!-- Gallery images will be loaded here -->
             </div>
         </section>
 

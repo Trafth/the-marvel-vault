@@ -1,7 +1,7 @@
 import { db } from './firebase-config.js';
 import { fetchAndDisplayData, displayMovie, displayNews, displayCharacter, displayTVShow, addData, editData, deleteData } from './database-functions.js';
 
-console.log('main.js loaded');
+// console.log('main.js loaded');
 
 let currentPath = window.location.pathname;
 
@@ -95,8 +95,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('releaseDate').value = data.releaseDate ? new Date(data.releaseDate).toISOString().split('T')[0] : '';
     document.getElementById('synopsis').value = data.synopsis || '';
     document.getElementById('stageTeaserUrl').value = data.stageTeaserUrl || '';
+    document.getElementById('category').value = data.category || '';
+    document.getElementById('platform').value = data.platform || '';
+    document.getElementById('universe').value = data.universe || '';
     document.getElementById('synopsis').value = data.synopsis || '';
     document.getElementById('trailerUrl').value = data.trailerUrl || '';
+    document.getElementById('author').value = data.author || '';
   }
   if (currentPath.includes('admin.html')) {
 
@@ -106,108 +110,107 @@ document.addEventListener('DOMContentLoaded', function () {
     let editingDocId = null;
     let currentCollection = collectionSelect.value;
 
-    // Function to update the current collection
-    function updateCurrentCollection() {      currentCollection = collectionSelect.value;
+    // Function to update the current collection and show/hide fields
+ function updateCurrentCollection() {
+      currentCollection = collectionSelect.value;
+      // Get references to all form field groups. Use optional chaining in case element doesn't exist.
+      const titleGroup = document.getElementById('title')?.parentElement;
+      const headlineGroup = document.getElementById('headline')?.parentElement;
+      const contentsGroup = document.getElementById('contents')?.parentElement;
+      const characterAliasGroup = document.getElementById('characterAlias')?.parentElement;
+      const characterNameGroup = document.getElementById('characterName')?.parentElement;
+      const castGroup = document.getElementById('cast')?.parentElement;
+      const coProducerGroup = document.getElementById('coProducer')?.parentElement;
+      const executiveProducersGroup = document.getElementById('executiveProducers')?.parentElement;
+      const imageUrlGroup = document.getElementById('imageUrl')?.parentElement;
+      const musicByGroup = document.getElementById('musicBy')?.parentElement;
+      const contentGroup = document.getElementById('content')?.parentElement;
+      const descriptionGroup = document.getElementById('description')?.parentElement;
+      const overviewImageUrlGroup = document.getElementById('overviewImageUrl')?.parentElement;
+      const producerGroup = document.getElementById('producer')?.parentElement;
+      const releaseYearGroup = document.getElementById('releaseYear')?.parentElement;
+      const stageTeaserUrlGroup = document.getElementById('stageTeaserUrl')?.parentElement;
+      const thumbnailPictureGroup = document.getElementById('thumbnailPicture')?.parentElement;
+      const synopsisGroup = document.getElementById('synopsis')?.parentElement;
+      const networkGroup = document.getElementById('network')?.parentElement;
+      const directorGroup = document.getElementById('director')?.parentElement;
+      const heroImageUrlGroup = document.getElementById('heroImageUrl')?.parentElement;
+      const releaseDateGroup = document.getElementById('releaseDate')?.parentElement;
+      const trailerUrlGroup = document.getElementById('trailerUrl')?.parentElement;
+      const authorGroup = document.getElementById('author')?.parentElement;
+      const categoryGroup = document.getElementById('category')?.parentElement;
+      const platformGroup = document.getElementById('platform')?.parentElement;
+      const universeGroup = document.getElementById('universe')?.parentElement;
 
-      // Get references to the news-specific fields and their labels
-      const headlineGroup = document.getElementById('headline').parentElement;
-      const contentsGroup = document.getElementById('contents').parentElement;
-      const thumbnailPictureGroup = document.getElementById('thumbnailPicture').parentElement;
-
-      // Get references to fields that should be hidden for movies
-      const contentGroup = document.getElementById('content').parentElement;
-      const descriptionGroup = document.getElementById('description').parentElement;
-
-      const characterAliasGroup = document.getElementById('characterAlias').parentElement;
- const characterNameGroup = document.getElementById('characterName').parentElement;
- const castGroup = document.getElementById('cast').parentElement;
- const coProducerGroup = document.getElementById('coProducer').parentElement;
- const executiveProducersGroup = document.getElementById('executiveProducers').parentElement;
- const imageUrlGroup = document.getElementById('imageUrl').parentElement;
- const musicByGroup = document.getElementById('musicBy').parentElement;
- const overviewImageUrlGroup = document.getElementById('overviewImageUrl').parentElement;
- const producerGroup = document.getElementById('producer').parentElement;
- const releaseYearGroup = document.getElementById('releaseYear').parentElement;
-      const stageTeaserUrlGroup = document.getElementById('stageTeaserUrl').parentElement;
- const synopsisGroup = document.getElementById('synopsis').parentElement;
-
-      const networkGroup = document.getElementById('network').parentElement;
- // Add reference to director, heroImageUrl, releaseDate, title, trailerUrl if not already included
-      const directorGroup = document.getElementById('director').parentElement;
-      const heroImageUrlGroup = document.getElementById('heroImageUrl').parentElement;
-      const releaseDateGroup = document.getElementById('releaseDate').parentElement;
-      const titleGroup = document.getElementById('title').parentElement;
-      const trailerUrlGroup = document.getElementById('trailerUrl').parentElement;
-
-      // Show or hide news-specific fields based on the selected collection
-      const isNewsCollection = currentCollection === 'news';
- if (headlineGroup) headlineGroup.style.display = isNewsCollection ? 'block' : 'none';
- if (contentsGroup) contentsGroup.style.display = isNewsCollection ? 'block' : 'none';
- if (thumbnailPictureGroup) thumbnailPictureGroup.style.display = isNewsCollection ? 'block' : 'none';
-
-      // Hide all fields by default, then show based on collection
+      // Put all potential field groups into an array for easier hiding
       const allFieldGroups = [
- headlineGroup, contentsGroup, thumbnailPictureGroup,
- contentGroup, descriptionGroup, characterAliasGroup,
- characterNameGroup, castGroup, coProducerGroup,
- executiveProducersGroup, imageUrlGroup, musicByGroup,
- overviewImageUrlGroup, producerGroup, releaseYearGroup, stageTeaserUrlGroup,
- synopsisGroup, networkGroup, directorGroup,
- heroImageUrlGroup, releaseDateGroup, titleGroup, trailerUrlGroup
-      ];
+        titleGroup, headlineGroup, contentsGroup, thumbnailPictureGroup,
+        contentGroup, descriptionGroup, characterAliasGroup,
+        characterNameGroup, castGroup, coProducerGroup,
+        executiveProducersGroup, imageUrlGroup, musicByGroup,
+        overviewImageUrlGroup, producerGroup, releaseYearGroup, stageTeaserUrlGroup, thumbnailPictureGroup,
+ categoryGroup, platformGroup, universeGroup, synopsisGroup,
+      ].filter(group => group !== null && group !== undefined); // Filter out any groups that weren't found
 
-      allFieldGroups.forEach(group => {
- if (group) group.style.display = 'none';
-      });
+      // Hide all fields initially
+ allFieldGroups.forEach(group => {
+ group.style.display = 'none';
+ });
 
       // Show fields based on the current collection
+      const isNewsCollection = currentCollection === 'news';
       const isMovieCollection = currentCollection === 'movies';
       const isTVShowCollection = currentCollection === 'tvshows';
       const isCharacterCollection = currentCollection === 'characters';
 
       if (isNewsCollection) {
- if (titleGroup) titleGroup.style.display = 'block';
- if (headlineGroup) headlineGroup.style.display = 'block';
- if (contentsGroup) contentsGroup.style.display = 'block';
- if (thumbnailPictureGroup) thumbnailPictureGroup.style.display = 'block';
- if (imageUrlGroup) imageUrlGroup.style.display = 'block';
-      } else if (isMovieCollection) {
- // Show movie-specific fields (and common fields if they exist)
- if (titleGroup) titleGroup.style.display = 'block';
- if (imageUrlGroup) imageUrlGroup.style.display = 'block';
- if (descriptionGroup) descriptionGroup.style.display = 'block';
- if (releaseYearGroup) releaseYearGroup.style.display = 'block';
- if (castGroup) castGroup.style.display = 'block';
- if (coProducerGroup) coProducerGroup.style.display = 'block';
- if (directorGroup) directorGroup.style.display = 'block';
- if (executiveProducersGroup) executiveProducersGroup.style.display = 'block';
- if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
- if (musicByGroup) musicByGroup.style.display = 'block';
- if (overviewImageUrlGroup) overviewImageUrlGroup.style.display = 'block';
- if (producerGroup) producerGroup.style.display = 'block';
- if (releaseDateGroup) releaseDateGroup.style.display = 'block';
- if (stageTeaserUrlGroup) stageTeaserUrlGroup.style.display = 'block';
- if (synopsisGroup) synopsisGroup.style.display = 'block';
- if (trailerUrlGroup) trailerUrlGroup.style.display = 'block';
-      } else if (isTVShowCollection) {
- // Show TV show-specific fields (and common fields if they exist)
- if (titleGroup) titleGroup.style.display = 'block';
- if (directorGroup) directorGroup.style.display = 'block';
- if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
- if (networkGroup) networkGroup.style.display = 'block';
- if (releaseDateGroup) releaseDateGroup.style.display = 'block';
- if (trailerUrlGroup) trailerUrlGroup.style.display = 'block';
- if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
- if (imageUrlGroup) imageUrlGroup.style.display = 'block';
- if (synopsisGroup) synopsisGroup.style.display = 'block';
-      }
+ if (titleGroup) titleGroup.style.display = 'block'; // Show title for News
+        if (headlineGroup) headlineGroup.style.display = 'block';
+        if (contentsGroup) contentsGroup.style.display = 'block';
+        if (thumbnailPictureGroup) thumbnailPictureGroup.style.display = 'block';
+        if (imageUrlGroup) imageUrlGroup.style.display = 'block';
+ if (categoryGroup) categoryGroup.style.display = 'block';
+        if (authorGroup) authorGroup.style.display = 'block';
 
- // Always show common fields if they exist
- if(directorGroup) directorGroup.style.display = 'block';
- if(heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
- if(releaseDateGroup) releaseDateGroup.style.display = 'block';
- if(titleGroup) titleGroup.style.display = 'block';
- if(trailerUrlGroup) trailerUrlGroup.style.display = 'block';
+      } else if (isMovieCollection) {
+ if (titleGroup) titleGroup.style.display = 'block'; // Show title for Movies
+        if (imageUrlGroup) imageUrlGroup.style.display = 'block';
+        if (descriptionGroup) descriptionGroup.style.display = 'block';
+        if (releaseYearGroup) releaseYearGroup.style.display = 'block';
+        if (castGroup) castGroup.style.display = 'block';
+ if (coProducerGroup) coProducerGroup.style.display = 'block';
+        if (directorGroup) directorGroup.style.display = 'block';
+        if (executiveProducersGroup) executiveProducersGroup.style.display = 'block';
+ if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
+        if (musicByGroup) musicByGroup.style.display = 'block';
+        if (overviewImageUrlGroup) overviewImageUrlGroup.style.display = 'block';
+        if (producerGroup) producerGroup.style.display = 'block';
+ if (releaseDateGroup) releaseDateGroup.style.display = 'block';
+        if (stageTeaserUrlGroup) stageTeaserUrlGroup.style.display = 'block';
+        if (synopsisGroup) synopsisGroup.style.display = 'block';
+ if (trailerUrlGroup) trailerUrlGroup.style.display = 'block';
+
+
+      } else if (isTVShowCollection) {
+ if (titleGroup) titleGroup.style.display = 'block'; // Show title for TV Shows
+        if (directorGroup) directorGroup.style.display = 'block';
+ if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
+        if (networkGroup) networkGroup.style.display = 'block';
+ if (releaseDateGroup) releaseDateGroup.style.display = 'block';
+ if (trailerUrlGroup) trailerUrlGroup.style.display = 'block';
+        if (imageUrlGroup) imageUrlGroup.style.display = 'block';
+        if (synopsisGroup) synopsisGroup.style.display = 'block';
+ if (platformGroup) platformGroup.style.display = 'block';
+
+      } else if (isCharacterCollection) {
+ if (titleGroup) titleGroup.style.display = 'block'; // Show title for Characters
+        if (characterAliasGroup) characterAliasGroup.style.display = 'block';
+ if (characterNameGroup) characterNameGroup.style.display = 'block';
+ if (universeGroup) universeGroup.style.display = 'block';
+ if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
+        if (imageUrlGroup) imageUrlGroup.style.display = 'block';
+        if (synopsisGroup) synopsisGroup.style.display = 'block';
+      }
 
       fetchAndDisplayCollectionData(currentCollection, dataListContainer, populateFormForEdit, editingDocId);
     }
@@ -236,6 +239,8 @@ document.addEventListener('DOMContentLoaded', function () {
  data.headline = document.getElementById('headline').value.trim();
  data.contents = document.getElementById('contents').value.trim();
  data.thumbnailPicture = document.getElementById('thumbnailPicture').value.trim();
+ data.author = document.getElementById('author').value.trim();
+ data.category = document.getElementById('category').value.trim();
  } else if (collectionName === 'characters') {
           // Add fields relevant to characters
  data.characterAlias = document.getElementById('characterAlias').value.trim();
@@ -243,6 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
  data.heroImageUrl = document.getElementById('heroImageUrl').value.trim();
  data.imageUrl = document.getElementById('imageUrl').value.trim();
  data.synopsis = document.getElementById('synopsis').value.trim();
+ data.universe = document.getElementById('universe').value.trim();
  }
  // Add fields relevant to other collections
  else {
@@ -263,6 +269,7 @@ document.addEventListener('DOMContentLoaded', function () {
  data.stageTeaserUrl = document.getElementById('stageTeaserUrl').value.trim();
  data.synopsis = document.getElementById('synopsis').value.trim();
  data.trailerUrl = document.getElementById('trailerUrl').value.trim();
+ data.platform = document.getElementById('platform').value.trim();
  }
 
         try {
@@ -374,7 +381,128 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
-  // Movie detail page logic
+
+  // Index Page
+  if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+    const moviesGrid = document.querySelector('.movies .movie-grid');
+    const blogGrid = document.querySelector('.blog-posts .blog-grid');
+    const itemsPerSection = 4; // Number of items to display in each section
+
+    // Function to fetch latest movies
+    async function fetchLatestMovies(limit) {
+      try {
+        const querySnapshot = await db.collection('movies').orderBy('releaseYear', 'desc').limit(limit).get();
+        const moviesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        return moviesData;
+      } catch (error) {
+        console.error('Error fetching latest movies:', error);
+        return [];
+      }
+    }
+
+    // Function to fetch latest news
+    async function fetchLatestNews(limit) {
+      try {
+        const querySnapshot = await db.collection('news').orderBy('releaseDate', 'desc').limit(limit).get();
+        const newsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        return newsData;
+      } catch (error) {
+        console.error('Error fetching latest news:', error);
+        return [];
+      }
+    }
+
+    // Function to display movies
+    function displayMovies(movies, container) {
+      if (!container) return;
+      container.innerHTML = ''; // Clear existing content
+      movies.forEach(movie => {
+        const movieItem = document.createElement('div');
+        movieItem.classList.add('movie-item'); // Assuming you have a CSS class for movie items
+        movieItem.innerHTML = `
+          <a href="movie-detail.html?id=${movie.id}">
+            <img src="${movie.imageUrl || 'placeholder.jpg'}" alt="${movie.title || 'No Title'}">
+            <p class="movie-title">${movie.title || 'No Title'}</p>
+          </a>
+        `;
+        container.appendChild(movieItem);
+      });
+    }
+
+    // Function to display news
+    function displayNews(news, container) {
+      if (!container) return;
+      container.innerHTML = ''; // Clear existing content
+      news.forEach(article => {
+        const newsArticle = document.createElement('div');
+        newsArticle.classList.add('blog-post-item'); // Assuming you have a CSS class for news items
+        newsArticle.innerHTML = `
+          <a href="news-detail.html?id=${article.id}">
+            <img src="${article.imageUrl || 'placeholder.jpg'}" alt="${article.title || 'No Title'}">
+            <p class="article-title">${article.title || 'No Title'}</p>
+            <p class="article-date">${article.releaseDate ? new Date(article.releaseDate.seconds * 1000).toLocaleDateString() : 'No Date'}</p>
+          </a>
+        `;
+        container.appendChild(newsArticle);
+      });
+    }
+
+    // Fetch and display data on page load
+    fetchLatestMovies(itemsPerSection).then(movies => displayMovies(movies, moviesGrid));
+    fetchLatestNews(itemsPerSection).then(news => displayNews(news, blogGrid));
+  }
+
+  // Movies Page
+  else if (window.location.pathname.includes('movies.html')) {
+    const itemsPerSection = 4; // Number of news items to display
+    const marvelMoviesGrid = document.querySelector('.movies-page-container .movies .movie-grid'); // Assuming the first section is "Marvel Movies"
+    const otherMoviesGrid = document.querySelector('.movies-page-container .other-movies .movie-grid'); // Assuming the second section is "Other Movies"
+    const loadMoreButtons = document.querySelectorAll('.movies-page-container .load-more');
+    const latestNewsBlogGrid = document.querySelector('.movies-page-container .latest-news-section .blog-grid');
+    const moviesPerPage = 12; // Number of movies to load per page
+
+    async function fetchMoviesData(collectionName, limit, offset, category = null) {
+      try {
+        let query = db.collection(collectionName);
+        if (category) {
+          query = query.where('category', '==', category);
+        }
+        query = query.orderBy('releaseYear', 'desc').limit(limit);
+        if (offset > 0) {
+          const lastDocSnapshot = await db.collection(collectionName).orderBy('releaseYear', 'desc').limit(offset).get();
+          let lastDoc = null;
+          if (!lastDocSnapshot.empty) {
+            lastDoc = lastDocSnapshot.docs[lastDocSnapshot.docs.length - 1];
+          } else {
+            console.warn(`Offset ${offset} is beyond the number of documents in '${collectionName}'.`);
+            return [];
+          }
+          query = db.collection(collectionName);
+          if (category) {
+            query = query.where('category', '==', category);
+          }
+          query = query.orderBy('releaseYear', 'desc').startAfter(lastDoc).limit(limit);
+        }
+        const querySnapshot = await query.get();
+        const moviesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        return moviesData;
+      } catch (error) {
+        console.error('Error fetching movies: ', error);
+        return [];
+      }
+    }
+
+    // Initial load of Marvel Movies
+    if (marvelMoviesGrid) {
+      fetchMoviesData('movies', moviesPerPage, 0, 'marvel').then(movies => { // Assuming 'marvel' category for Marvel Movies
+        displayMovies(movies, '.movies-page-container .movies .movie-grid');
+      });
+    }
+
+    fetchLatestNews(itemsPerSection).then(news => displayNews(news, latestNewsBlogGrid));
+  }
+
+  // Movie Detail Page
   else if (window.location.pathname.includes('movie-detail.html')) {
     const movieDetailContainer = document.querySelector('.movie-detail-container');
 
@@ -397,92 +525,74 @@ document.addEventListener('DOMContentLoaded', function () {
         if (doc.exists) {
           const movieData = doc.data();
 
+          // Get references to HTML elements for movie details
           const heroBackground = document.querySelector('.hero-section');
-          const overviewTitleElement = document.querySelector('.overview h2');
-          const movieOverviewTextElement = document.querySelector('#movie-synopsis');
-          const executiveProducersElement = document.getElementById('executive-producers');
-          const producerElement = document.getElementById('producer');
-          const coProducerElement = document.getElementById('co-producer');
-          const directorElement = document.getElementById('director');
-          const castElement = document.getElementById('cast');
-          const musicByElement = document.getElementById('music-by');
-          const movieReleaseYearElement = document.getElementById('movie-release-year');
-          const movieTrailerVideoElement = document.getElementById('movie-trailer');
-          const moviePosterElement = document.getElementById('overview-poster');
+          const mainTitleElement = document.getElementById('movie-title'); // Assuming you have an element with this ID for the main title
+          const directorNameElement = document.getElementById('director-name');
+          const castListElement = document.getElementById('cast-list');
+          const executiveProducersListElement = document.getElementById('executive-producers-list');
+          const producerNameElement = document.getElementById('producer-name');
+          const coProducerNameElement = document.getElementById('co-producer-name');
+          const musicByNameElement = document.getElementById('music-by-name');
+          const releaseYearTextElement = document.getElementById('release-year-text'); // Assuming you have an element with this ID
+          const overviewPosterElement = document.getElementById('overview-poster');
+          const trailerIframeElement = document.getElementById('movie-trailer'); // Assuming you have an iframe with this ID
+          const overviewImageElement = document.getElementById('overview-poster');
 
+          // Populate elements with movie data
           if (heroBackground && movieData.heroImageUrl) {
             heroBackground.style.backgroundImage = `url(${movieData.heroImageUrl || ''})`;
             heroBackground.style.backgroundSize = 'cover';
             heroBackground.style.backgroundPosition = 'center';
           }
 
-          if (movieOverviewTextElement) movieOverviewTextElement.textContent = movieData.synopsis || '';
-          if (overviewTitleElement) overviewTitleElement.textContent = 'OVERVIEW';
+          if (mainTitleElement) mainTitleElement.textContent = movieData.title || '';
+          if (document.getElementById('synopsis-text')) document.getElementById('synopsis-text').textContent = movieData.synopsis || ''; // Assuming you have an element with this ID for the synopsis
 
-          if (movieReleaseYearElement) {
-            movieReleaseYearElement.textContent = `Release Year: ${movieData.releaseYear}` || 'Release Year not available';
-          }
-
-          if (executiveProducersElement && movieData.executiveProducers) {
-            if (Array.isArray(movieData.executiveProducers)) {
-              executiveProducersElement.textContent = `EXECUTIVE PRODUCERS: ${movieData.executiveProducers.join(', ')}`;
-            } else {
-              executiveProducersElement.textContent = `EXECUTIVE PRODUCERS: ${movieData.executiveProducers}`;
-            }
-          }
-          if (producerElement && movieData.producer) {
-            producerElement.textContent = `PRODUCER: ${movieData.producer}`;
-          }
-          if (coProducerElement && movieData.coProducer) {
-            coProducerElement.textContent = `CO-PRODUCER: ${movieData.coProducer}`;
+          if (castListElement && movieData.cast) {
+ if (Array.isArray(movieData.cast)) {
+ castListElement.textContent = movieData.cast.join(', ');
+ } else {
+ castListElement.textContent = movieData.cast; // Handle cases where cast might not be an array
+ }
           }
 
-          if (directorElement && movieData.director) {
-            directorElement.textContent = `Director: ${movieData.director}`;
-          }
+ if (directorNameElement) directorNameElement.textContent = movieData.director || '';
 
-          if (castElement && movieData.cast) {
-            if (Array.isArray(movieData.cast)) {
-              castElement.textContent = `Cast: ${movieData.cast.join(', ')}`;
-            } else {
-              castElement.textContent = `Cast: ${movieData.cast}`;
-            }
+          if (executiveProducersListElement && movieData.executiveProducers) {
+ if (Array.isArray(movieData.executiveProducers)) {
+ executiveProducersListElement.textContent = movieData.executiveProducers.join(', ');
+ } else {
+ executiveProducersListElement.textContent = movieData.executiveProducers; // Handle cases where executiveProducers might not be an array
+ }
           }
-          if (musicByElement && movieData.musicBy) {
-            musicByElement.textContent = `MUSIC BY: ${movieData.musicBy}`;
-          }
+ if (musicByNameElement) musicByNameElement.textContent = movieData.musicBy || '';
+          if (producerNameElement) producerNameElement.textContent = movieData.producer || '';
+          if (coProducerNameElement) coProducerNameElement.textContent = movieData.coProducer || '';
 
-          if (moviePosterElement) moviePosterElement.src = movieData.imageUrl || 'placeholder.jpg';
-          const overviewImageElement = document.getElementById('overview-poster');
+          if (releaseYearTextElement) {
+            releaseYearTextElement.textContent = `Release Year: ${movieData.releaseYear}` || 'Release Year not available';
+          }
+          // You might want to format releaseDate if you're displaying it
+          // if (document.getElementById('release-date-text')) {
+          //   const releaseDate = movieData.releaseDate ? new Date(movieData.releaseDate.seconds * 1000) : null;
+          //   if (releaseDate) {
+          //     document.getElementById('release-date-text').textContent = `Release Date: ${releaseDate.toLocaleDateString()}`;
+          //   } else {
+          //     document.getElementById('release-date-text').textContent = 'Release Date not available';
+          //   }
+          // }
+
+
+          if (overviewPosterElement) overviewPosterElement.src = movieData.imageUrl || 'placeholder.jpg';
+
           if (overviewImageElement && movieData.overviewImageUrl) {
             overviewImageElement.src = movieData.overviewImageUrl;
           }
 
-          const trailerIframe = document.getElementById('movie-trailer');
-          if (trailerIframe && movieData.trailerUrl) {
-            if (movieData.trailerUrl.includes('youtube.com/embed/')) {
-              trailerIframe.src = movieData.trailerUrl;
-            } else {
-              trailerIframe.src = `https://www.youtube.com/embed/${movieData.trailerUrl}`;
-            }
-          }
-
-          const mainTitleElement = document.getElementById('movie-title');
-          if (mainTitleElement) {
-            mainTitleElement.textContent = movieData.title || '';
-          }
-
-          const galleryGrid = document.querySelector('.gallery-grid');
-          if (galleryGrid && movieData.galleryImages && Array.isArray(movieData.galleryImages)) {
-            galleryGrid.innerHTML = '';
-            movieData.galleryImages.forEach(imageUrl => {
-              const img = document.createElement('img');
-              img.src = imageUrl;
-              img.alt = 'Gallery Image';
-              galleryGrid.appendChild(img);
-            });
-          } else if (galleryGrid) {
-            galleryGrid.innerHTML = '<p>No gallery images available.</p>';
+          // Set the trailer source if available
+          if (trailerIframeElement && movieData.trailerUrl) {
+            trailerIframeElement.src = movieData.trailerUrl;
           }
         } else {
           document.querySelector('.movie-detail-container').innerHTML = '<p>Movie not found.</p>';
@@ -493,7 +603,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
-  // News detail page logic
+
+  // News Detail Page
   else if (window.location.pathname.includes('news-detail.html')) {
     const newsDetailContainer = document.querySelector('.movie-detail-container');
 
@@ -518,9 +629,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
           const newsHeadlineElement = document.getElementById('news-headline');
           const newsContentsElement = document.getElementById('news-contents');
-          const newsThumbnailElement = document.getElementById('news-thumbnail');
           const heroBackground = document.querySelector('.hero-section');
           const newsContentElement = document.getElementById('news-content');
+          const newsTitleElement = document.getElementById('news-title');
+          const newsAuthorElement = document.getElementById('news-author');
+          const newsCategoryElement = document.getElementById('news-category');
+          const newsReleaseDateElement = document.getElementById('news-releaseDate');
+          const newsImageUrlElement = document.getElementById('news-image-url');
+          const newsThumbnailElement = document.getElementById('news-thumbnail');
+
+
           const overviewPosterElement = document.getElementById('overview-poster');
 
           if (newsHeadlineElement) newsHeadlineElement.textContent = newsData.headline || '';
@@ -531,16 +649,38 @@ document.addEventListener('DOMContentLoaded', function () {
           }
 
           if (newsContentElement) newsContentElement.textContent = newsData.content || '';
-          if (newsContentsElement) newsContentsElement.textContent = newsData.contents || '';
+ if (newsContentsElement) {
+ newsContentsElement.textContent = newsData.contents || '';
+ }
 
+          // Populate new fields
+          if (newsTitleElement) newsTitleElement.textContent = newsData.title || '';
+          if (newsAuthorElement) newsAuthorElement.textContent = `By: ${newsData.author || 'N/A'}`;
+          if (newsCategoryElement) newsCategoryElement.textContent = ` ${newsData.category || 'N/A'}`;
+
+          if (newsReleaseDateElement && newsData.releaseDate) {
+            try {
+              const releaseDate = new Date(newsData.releaseDate.seconds * 1000);
+ newsReleaseDateElement.textContent = `Published: ${releaseDate.toLocaleDateString()}`;
+            } catch (error) {
+              console.error('Error formatting release date:', error);
+              newsReleaseDateElement.textContent = 'Release Date: N/A';
+            }
+          } else if (newsReleaseDateElement) {
+            newsReleaseDateElement.textContent = 'Release Date: N/A';
+          }
+
+          if (newsImageUrlElement) newsImageUrlElement.src = newsData.imageUrl || 'placeholder.jpg';
           if (overviewPosterElement && newsData.imageUrl) {
             overviewPosterElement.src = newsData.imageUrl || 'placeholder.jpg';
           }
+
+          // Moved this block inside the if (doc.exists) block
+ if (document.getElementById('news-thumbnail') && newsData.thumbnailPicture) {
+ document.getElementById('news-thumbnail').src = newsData.thumbnailPicture || 'placeholder.jpg';
+          }
         } else {
           document.querySelector('.movie-detail-container').innerHTML = '<p>News not found.</p>';
-        }
-        if (newsThumbnailElement && newsData.thumbnailPicture) {
- newsThumbnailElement.src = newsData.thumbnailPicture || 'placeholder.jpg';
         }
       } catch (error) {
         console.error('Error fetching news document:', error);
@@ -548,7 +688,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
-  // Character detail page logic
+
+  // Character Detail Page
   else if (window.location.pathname.includes('characters-detail.html')) {
     const characterDetailContainer = document.querySelector('.movie-detail-container');
 
@@ -571,6 +712,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (doc.exists) {
           const characterData = doc.data();
 
+          // Get references to HTML elements for character details and populate them
+          const characterTitleElement = document.getElementById('character-title');
+          const characterAliasElement = document.getElementById('character-alias');
+          const characterNameElement = document.getElementById('character-name');
+          const characterUniverseElement = document.getElementById('character-universe');
+
           const heroBackground = document.querySelector('.hero-section');
           const characterDescriptionElement = document.getElementById('character-description');
           const overviewPosterElement = document.getElementById('overview-poster');
@@ -581,11 +728,16 @@ document.addEventListener('DOMContentLoaded', function () {
             heroBackground.style.backgroundPosition = 'center';
           }
 
-          if (characterDescriptionElement) characterDescriptionElement.textContent = characterData.description || '';
+          if (characterTitleElement) characterTitleElement.textContent = characterData.title || 'N/A';
+          if (characterAliasElement) characterAliasElement.textContent = `Alias: ${characterData.characterAlias || 'N/A'}`;
+          if (characterNameElement) characterNameElement.textContent = `Name: ${characterData.characterName || 'N/A'}`;
+          if (characterUniverseElement) characterUniverseElement.textContent = `Universe: ${characterData.universe || 'N/A'}`;
+          if (characterDescriptionElement) characterDescriptionElement.textContent = characterData.synopsis || 'No synopsis available.';
 
           if (overviewPosterElement && characterData.imageUrl) {
             overviewPosterElement.src = characterData.imageUrl || 'placeholder.jpg';
           }
+
         } else {
           document.querySelector('.movie-detail-container').innerHTML = '<p>Character not found.</p>';
         }
@@ -595,7 +747,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
-  // TV Show detail page logic
+
+  // TV Show Detail Page
   else if (window.location.pathname.includes('tvshows-detail.html')) {
     const tvShowDetailContainer = document.querySelector('.movie-detail-container');
 
@@ -610,36 +763,394 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    async function fetchTVShowData(tvShowId) {
+    async function fetchTVShowData(tvshowId) {
       try {
-        const tvShowRef = db.collection('tvshows').doc(tvShowId);
+        const tvShowRef = db.collection('tvshows').doc(tvshowId);
         const doc = await tvShowRef.get();
 
         if (doc.exists) {
           const tvShowData = doc.data();
 
+          // Get references to the HTML elements
           const heroBackground = document.querySelector('.hero-section');
-          const tvShowDescriptionElement = document.getElementById('tvshow-description');
+          const tvShowTitleElement = document.getElementById('tvshow-title');
+          const tvShowDirectorElement = document.getElementById('tvshow-director');
+          const tvShowNetworkElement = document.getElementById('tvshow-network');
+          const tvShowPlatformElement = document.getElementById('tvshow-platform');
+          const tvShowReleaseDateElement = document.getElementById('tvshow-release-date');
+          const tvShowSynopsisElement = document.getElementById('tvshow-synopsis');
+          const tvShowTrailerElement = document.getElementById('tvshow-trailer'); // This will be the container for the trailer iframe or link
           const overviewPosterElement = document.getElementById('overview-poster');
+          const overviewImageElement = document.getElementById('overview-poster');
 
+          // Populate the hero section background
           if (heroBackground && tvShowData.heroImageUrl) {
             heroBackground.style.backgroundImage = `url(${tvShowData.heroImageUrl || ''})`;
             heroBackground.style.backgroundSize = 'cover';
             heroBackground.style.backgroundPosition = 'center';
           }
+          // Populate the overview section details
+          if (tvShowTitleElement) tvShowTitleElement.textContent = tvShowData.title || 'N/A';
+          if (tvShowDirectorElement) tvShowDirectorElement.textContent = `Director: ${tvShowData.director || 'N/A'}`;
+          if (tvShowNetworkElement) tvShowNetworkElement.textContent = `Network: ${tvShowData.network || 'N/A'}`;
+          if (tvShowPlatformElement) tvShowPlatformElement.textContent = `Platform: ${tvShowData.platform || 'N/A'}`;
 
-          if (tvShowDescriptionElement) tvShowDescriptionElement.textContent = tvShowData.description || '';
-
-          if (overviewPosterElement && tvShowData.imageUrl) {
-            overviewPosterElement.src = tvShowData.imageUrl || 'placeholder.jpg';
+          // Format and display release date
+          if (tvShowReleaseDateElement && tvShowData.releaseDate) {
+            try {
+              const releaseDate = new Date(tvShowData.releaseDate.seconds * 1000);
+              tvShowReleaseDateElement.textContent = `Release Date: ${releaseDate.toLocaleDateString()}`;
+            } catch (error) {
+              console.error('Error formatting TV show release date:', error);
+              tvShowReleaseDateElement.textContent = 'Release Date: N/A';
+            }
+          } else if (tvShowReleaseDateElement) {
+            tvShowReleaseDateElement.textContent = 'Release Date: N/A';
           }
-        } else {
-          document.querySelector('.movie-detail-container').innerHTML = '<p>TV Show not found.</p>';
-        }
-      } catch (error) {
+          if (overviewPosterElement) overviewPosterElement.src = tvShowData.imageUrl || 'placeholder.jpg';
+
+          if (overviewImageElement && tvShowData.overviewImageUrl) {
+            overviewImageElement.src = tvShowData.overviewImageUrl;
+          }
+          if (tvShowSynopsisElement) tvShowSynopsisElement.textContent = tvShowData.synopsis || 'No synopsis available.';
+
+          // Handle trailer display (embedding YouTube trailers)
+          if (tvShowTrailerElement && tvShowData.trailerUrl) {
+            // Check if the trailer URL is a YouTube link
+            if (tvShowData.trailerUrl.includes('youtube.com') || tvShowData.trailerUrl.includes('youtu.be')) {
+              const youtubeVideoId = getYouTubeVideoId(tvShowData.trailerUrl);
+              if (youtubeVideoId) {
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube.com/embed/${youtubeVideoId}`;
+                iframe.width = "560"; // Adjust size as needed
+                iframe.height = "315"; // Adjust size as needed
+                iframe.setAttribute("allowfullscreen", "");
+                iframe.setAttribute("frameborder", "0");
+                tvShowTrailerElement.innerHTML = ''; // Clear placeholder
+                tvShowTrailerElement.appendChild(iframe);
+              } else {
+                tvShowTrailerElement.innerHTML = `<p>Invalid YouTube URL.</p>`;
+              }
+            } else {
+              tvShowTrailerElement.innerHTML = `<p>Trailer: <a href="${tvShowData.trailerUrl}" target="_blank">${tvShowData.trailerUrl}</a></p>`;
+            }
+          } else if (tvShowTrailerElement) {
+ tvShowTrailerElement.innerHTML = '<p>No trailer available.</p>';
+          }}
+ } catch (error) {
         console.error('Error fetching tvshow document:', error);
         document.querySelector('.movie-detail-container').innerHTML = '<p>Error loading tvshow details.</p>';
       }
+      }
+
+  // Helper function to extract YouTube video ID
+  function getYouTubeVideoId(url) {
+    let videoId = null;
+    const regex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/i;
+    const match = url.match(regex);
+    if (match && match[1]) {
+ videoId = match[1];
     }
+    return videoId;
+  }
+
+
+  }
+  // Characters Page
+  else if (window.location.pathname.includes('characters.html')) {
+    const marvelCharactersGrid = document.querySelector('.marvel-characters-section .character-list');
+    const otherCharactersGrid = document.querySelector('.other-characters-section .character-list');
+    const loadMoreButton = document.querySelector('.characters-page-container .load-more');
+ const charactersPerPage = 12; // Number of characters to load per page
+    let currentCharacterPage = 0;
+
+    async function fetchCharactersData(limit, offset, universe = null) {
+      try {
+        let query = db.collection('characters').orderBy('characterName').limit(limit);
+ if (offset > 0) {
+          const lastDoc = await db.collection('characters').orderBy('characterName').limit(offset).get().then(snapshot => {
+            return snapshot.docs[snapshot.docs.length - 1];
+          });
+          query = db.collection('characters').orderBy('characterName').startAfter(lastDoc).limit(limit);
+        }
+ if (universe) {
+          query = query.where('universe', '==', universe);
+ }
+        const querySnapshot = await query.get();
+        const charactersData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        return charactersData;
+      } catch (error) {
+        console.error('Error fetching characters: ', error);
+        return [];
+      }
+    }
+
+    function displayCharacters(characters, containerSelector, append = false) {
+      const container = document.querySelector(containerSelector);
+      if (!container) {
+        console.error(`Element with selector ${containerSelector} not found.`);
+        return;
+ }
+ if (!append) {
+        container.innerHTML = ''; // Clear existing content if not appending
+      }
+
+      characters.forEach(character => {
+        const characterItem = document.createElement('div');
+        characterItem.classList.add('character-item', 'movie-card'); // Added movie-card class
+        characterItem.innerHTML = `
+          <a href="characters-detail.html?id=${character.id}">
+            <img src="${character.imageUrl || 'placeholder.jpg'}" alt="${character.characterName || 'No Name'}"></a>
+          <div class="movie-info">
+            <p class="movie-title">${character.characterName || 'No Name'}</p>
+            <p class="movie-date">${character.characterAlias || ''}</p>
+          </div>
+          </a>
+        `;
+        container.appendChild(characterItem);
+      });
+    }
+
+    // Initial load of characters
+    if (marvelCharactersGrid) {
+      // Fetch and display Marvel characters
+ fetchCharactersData(charactersPerPage, 0, 'marvel').then(characters => { // Pass 'marvel' universe
+        displayCharacters(characters, '.marvel-characters-section .character-list');
+        currentCharacterPage = 1;
+      });
+    }
+
+    // Use setTimeout for the "Other characters" section to allow potential DOM rendering
+    setTimeout(() => {
+      // Fetch and display Other characters
+ fetchCharactersData(charactersPerPage, 0, 'other').then(characters => { // Pass 'other' universe
+        displayCharacters(characters, '.other-characters-section .character-list');
+      });
+    }, 100); // Add a small delay (e.g., 100ms)
+
+    // Helper function to determine the universe based on the parent section
+    function getCharacterUniverse(element) {
+      if (element.closest('.marvel-characters-section')) return 'marvel';
+      if (element.closest('.other-characters-section')) return 'other';
+    }
+
+    // Load more button functionality
+    if (loadMoreButton) {
+      loadMoreButton.addEventListener('click', async () => {
+        const newCharacters = await fetchCharactersData(charactersPerPage, currentCharacterPage * charactersPerPage);
+        displayCharacters(newCharacters, '.marvel-characters-section .character-list', true); // Append new characters
+        // Note: The load more button is only associated with the Marvel characters section in your current HTML structure.
+        // If you want a separate load more for 'other' characters, you'll need another button and associated logic.
+        currentCharacterPage++;
+      });
+    }
+  }
+
+  // News Page
+  else if (window.location.pathname.includes('news.html')) {
+    const latestNewsArticlesContainer = document.querySelector('.latest-news-section .news-articles');
+    const latestTvShowsNewsArticlesContainer = document.querySelector('.latest-tv-shows-news-section .news-articles');
+    const loadMoreButtons = document.querySelectorAll('.news-page-container .load-more');
+    const newsPerPage = 8; // Number of news articles to load per page
+    let currentNewsPage = 0;
+
+ async function fetchNewsData(collectionName, limit, offset, category = null) {
+ try {
+ let query = db.collection(collectionName);
+ if (category) {
+        query = query.where('category', '==', category);
+ }
+ query = query.orderBy('releaseDate', 'desc').limit(limit);
+ if (offset > 0) {
+          const lastDocSnapshot = await db.collection(collectionName).orderBy('releaseDate', 'desc').limit(offset).get();
+          let lastDoc = null;
+          if (!lastDocSnapshot.empty) {
+            lastDoc = lastDocSnapshot.docs[lastDocSnapshot.docs.length - 1];
+          } else {
+            // If offset is greater than available documents, return empty
+            console.warn(`Offset ${offset} is beyond the number of documents in '${collectionName}'.`);
+            return [];
+          }
+ query = db.collection(collectionName);
+ if (category) {
+ query = query.where('category', '==', category);
+ }
+ query = query.orderBy('releaseDate', 'desc').startAfter(lastDoc).limit(limit);
+        }
+        const querySnapshot = await query.get();
+        const newsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        return newsData;
+      } catch (error) {
+        console.error('Error fetching news: ', error);
+        return [];
+      }
+    }
+
+    function displayNewsArticles(news, containerSelector, append = false) {
+ const container = document.querySelector(containerSelector);
+ if (!container) {
+        console.error(`Element with selector ${containerSelector} not found.`);
+        return;
+      }
+
+      if (!append) {
+        container.innerHTML = ''; // Clear existing content if not appending
+      }
+
+      news.forEach(article => {
+        const newsArticle = document.createElement('div');
+        newsArticle.classList.add('blog-post-item');
+        newsArticle.innerHTML = `
+         <a href="news-detail.html?id=${article.id}">
+            <img class="blog-post-image" src="${article.imageUrl || 'placeholder.jpg'}" alt="${article.title || 'No Title'}">
+            <p class="article-date">${article.releaseDate ? new Date(article.releaseDate.seconds * 1000).toLocaleDateString() : 'No Date'}</p>
+            <h1 class="article-title">${article.title || 'No Title'}</h1>
+          </a>
+        `;
+        container.appendChild(newsArticle);
+      });
+    }
+
+    // Initial load of latest news
+ if (latestNewsArticlesContainer) {
+      // Fetch news with category 'movie'
+      fetchNewsData('news', newsPerPage, 0, 'MOVIES').then(news => {
+        displayNewsArticles(news, '.latest-news-section .news-articles');
+        currentNewsPage++; // Increment page count after initial load
+      });
+    }
+    if (latestTvShowsNewsArticlesContainer) {
+ fetchNewsData('news', newsPerPage, 0, 'TV SHOWS').then(tvNews => { // Fetch news with category 'tvshow'
+        displayNewsArticles(tvNews, '.latest-tv-shows-news-section .news-articles');
+      });
+    }
+
+
+    // Load more button functionality for news sections
+    loadMoreButtons.forEach(button => {
+      button.addEventListener('click', async () => {
+        // Assuming the load more button is within a section that can identify the collection
+        const section = button.closest('section');
+        const category = section.classList.contains('latest-news-section') ? 'MOVIES' : 'TV SHOWS'; // Determine category based on section class
+        const newNews = await fetchNewsData('news', newsPerPage, currentNewsPage * newsPerPage, category); // Pass 'news' as collectionName and determined category
+        if (newNews.length > 0) {
+          currentNewsPage++; // Increment page count only if new data is loaded
+        }
+
+        displayNewsArticles(newNews, `.${section.classList[0]} .news-articles`, true); // Append new articles
+        currentNewsPage++;
+      });
+    });
+  }
+
+  // TV Shows Page
+  else if (window.location.pathname.includes('tvshows.html')) {
+    const marvelTvShowsGrid = document.querySelector('.tv-shows-grid-section:nth-of-type(1) .tv-show-grid'); // Assuming the first section is Marvel on Disney+
+    const moreFromDisneyGrid = document.querySelector('.tv-shows-grid-section:nth-of-type(2) .tv-show-grid'); // Assuming the second section is More from Disney+
+    const marvelSeriesGrid = document.querySelector('.tv-shows-grid-section:nth-of-type(3) .tv-show-grid'); // Assuming the third section is Marvel Series on Disney+
+    const loadMoreButtons = document.querySelectorAll('.tv-shows-grid-section .load-more');
+    const tvShowsPerPage = 12; // Number of TV shows to load per page
+    let currentTvShowsPage = 0;
+
+ async function fetchTvShowsData(collectionName, limit, offset, platform = null) {
+      try {
+ let query = db.collection(collectionName);
+ if (platform) {
+ query = query.where('platform', '==', platform);
+ }
+ query = query.orderBy('releaseDate', 'desc').limit(limit);
+        if (offset > 0) {
+          const lastDocSnapshot = await db.collection(collectionName).orderBy('releaseDate', 'desc').limit(offset).get();
+          let lastDoc = null;
+          if (!lastDocSnapshot.empty) {
+            lastDoc = lastDocSnapshot.docs[lastDocSnapshot.docs.length - 1];
+          } else {
+            // If offset is greater than available documents, return empty
+            console.warn(`Offset ${offset} is beyond the number of documents in '${collectionName}'.`);
+            return [];
+          }
+ query = db.collection(collectionName);
+ if (platform) {
+ query = query.where('platform', '==', platform);
+ }
+ query = query.orderBy('releaseDate', 'desc').startAfter(lastDoc).limit(limit);
+        }
+        const querySnapshot = await query.get();
+        const tvShowsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        return tvShowsData;
+      } catch (error) {
+        console.error('Error fetching TV shows: ', error);
+        return [];
+      }
+    }
+
+    function displayTvShows(tvshows, containerSelector, append = false) {
+      const container = document.querySelector(containerSelector);
+      if (!container) {
+        console.error(`Element with selector ${containerSelector} not found.`);
+        return;
+      }
+
+ if (!append) {
+        container.innerHTML = ''; // Clear existing content if not appending
+      }
+
+      tvshows.forEach(tvshows => {
+        const tvShowItem = document.createElement('div');
+        tvShowItem.classList.add('tv-show-item');
+        tvShowItem.innerHTML = `
+          <a href="tvshows-detail.html?id=${tvshows.id}">
+            <img src="${tvshows.imageUrl || 'placeholder.jpg'}" alt="${tvshows.title || 'No Title'}">
+            <p class="tv-show-title">${tvshows.title || 'No Title'}</p>
+            <p class="tv-show-release">${tvshows.releaseDate ? new Date(tvshows.releaseDate.seconds * 1000).toLocaleDateString() : (tvshows.releaseYear || 'No Date')}</p>
+          </a>
+        `;
+        container.appendChild(tvShowItem);
+      });
+    }
+
+    // Initial load of TV shows for each section
+    if (marvelTvShowsGrid) {
+      fetchTvShowsData('tvshows', tvShowsPerPage, 0, 'Disney+').then(tvshows => {
+ displayTvShows(tvshows, '.tv-shows-grid-section:nth-of-type(1) .tv-show-grid');
+      });
+    }
+
+ if (moreFromDisneyGrid) {
+ fetchTvShowsData('tvshows', tvShowsPerPage, 0, 'disneyplus-other').then(tvshows => {
+ displayTvShows(tvshows, '.tv-shows-grid-section:nth-of-type(2) .tv-show-grid');
+      });
+    }
+
+    if (marvelSeriesGrid) {
+ fetchTvShowsData('tvshows', tvShowsPerPage, 0, 'Disney+').then(tvshows => {
+ displayTvShows(tvshows, '.tv-shows-grid-section:nth-of-type(3) .tv-show-grid');
+      });
+    }
+    // Load more button functionality for TV show sections
+    loadMoreButtons.forEach((button, index) => {
+ button.addEventListener('click', async () => {
+        const parentSection = button.closest('.tv-shows-grid-section');
+        let platform = null;
+        if (index === 0) platform = 'Disney+';
+        else if (index === 1) platform = 'disneyplus-other';
+        else if (index === 2) platform = 'Disney+';
+        
+        // Determine the current page for this specific section. This requires a separate counter for each section.
+        // For simplicity in this diff, we'll assume a single page counter for demonstration.
+        // A robust solution would involve mapping page counters to sections or platforms.
+        const currentPage = parseInt(button.dataset.currentPage || 0);
+        const newTvShows = await fetchTvShowsData('tvshows', tvShowsPerPage, currentPage * tvShowsPerPage, platform);
+
+        if (newTvShows.length > 0) {
+          const containerSelector = `.tv-shows-grid-section:nth-of-type(${index + 1}) .tv-show-grid`;
+ displayTvShows(newTvShows, containerSelector, true);
+ button.dataset.currentPage = currentPage + 1; // Update the page counter for this button
+        } else {
+ button.style.display = 'none'; // Hide button if no more data
+        }
+      });
+ button.dataset.currentPage = 0; // Initialize page counter for each button
+    });
   }
 });

@@ -1,1 +1,1 @@
-# the-marvel-vault
+A simple HTML/JS/CSS starter template

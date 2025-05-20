@@ -401,14 +401,14 @@ body {
     padding: 0 1rem;
 }
 
-.movie-hero-section {
+.hero-section { /* Re-using the existing hero-section class */
     position: relative;
-    height: 400px; /* Adjust as needed */
+    height: 450px; /* Adjusted height to accommodate title */
     overflow: hidden;
     margin-bottom: 2rem;
 }
 
-.movie-hero-bg {
+.hero-background { /* Re-using the existing hero-background class */
     position: absolute;
     top: 0;
     left: 0;
@@ -416,59 +416,53 @@ body {
     height: 100%;
     background-size: cover;
     background-position: center;
-    filter: brightness(0.5); /* Darken the background image */
+    filter: brightness(0.4); /* Slightly darker for text readability */
     z-index: 0;
 }
 
-.movie-hero-content {
+.hero-content { /* Re-using the existing hero-content class */
     position: relative;
     z-index: 1;
     display: flex;
-    align-items: center;
+    flex-direction: column; /* Stack content vertically in hero */
+    justify-content: flex-end; /* Align content to the bottom */
     padding: 2rem;
     height: 100%;
 }
 
+.hero-content h1 {
+    font-size: 3rem;
+    margin: 0 0 0.5rem 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* Remove the movie-poster class as it's not needed with the new layout */
+
+/* 
 .movie-poster {
-    width: 200px; /* Adjust poster width */
+    width: 200px; 
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     margin-right: 2rem;
 }
+ */
 
-.movie-info {
-    color: #fff;
-}
 
-.movie-info h1 {
-    font-size: 2.5rem;
-    margin: 0 0 1rem 0;
-}
-
-.movie-info p {
-    font-size: 1rem;
-    color: #ccc;
-    margin: 0 0 0.5rem 0;
-}
-
-.movie-trailer-section,
-.movie-overview-section,
-.movie-gallery-section {
+.trailer-section,
+.overview-section { /* Re-using/adjusting existing classes */
     margin-bottom: 2rem;
 }
 
-.movie-trailer-section h2,
-.movie-overview-section h2,
-.movie-gallery-section h2 {
+.trailer-section h2,
+.overview-section h2 {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
     border-bottom: 2px solid #e62429;
     display: inline-block;
     padding-bottom: 0.5rem;
 }
-
-.movie-trailer-video {
+.trailer-container { /* Re-using/adjusting existing class */
     position: relative;
     padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     height: 0;
@@ -476,45 +470,56 @@ body {
     border-radius: 8px;
 }
 
-.movie-trailer-video iframe {
+.trailer-container iframe { /* Re-using/adjusting existing class */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 }
+/* Remove gallery styles */
+/*
 
-.movie-gallery {
+.gallery-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #e62429;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
 }
 
-.movie-gallery img {
+.gallery-grid img {
     width: 100%;
     height: auto;
     border-radius: 8px;
     cursor: pointer; /* Indicate clickable images */
-}
+
+
 .mobile-menu-close {
-        display: none !important;
-      }
+    display: none !important;
+  }
 
 /* Responsive Styles */
 @media (max-width: 818px) {
-    /* Style the close button */
-    .mobile-menu-close {
-      display: block !important;
-      position: absolute !important;
-      top: 10px !important;
-      right: 10px !important;
-      background: none !important;
-      border: none !important;
-      color: #fff !important;
-      font-size: 1.5rem !important;
-      cursor: pointer !important;
-      z-index: 1200 !important;
-    }
+/* Style the close button */
+.mobile-menu-close {
+  display: block !important;
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  background: none !important;
+  border: none !important;
+  color: #fff !important;
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
+  z-index: 1200 !important;
+}
 
     .nav-links {
         flex-direction: column !important;

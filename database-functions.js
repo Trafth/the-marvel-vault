@@ -52,12 +52,12 @@ function displayNews(newsItem, container) {
 
 // Example display function for characters
 function displayCharacter(character, container) {
-  const characterCard = document.createElement('div');
-  characterCard.classList.add('character-card');
-  characterCard.innerHTML = `<img src="${character.image}" alt="${character.name}">
-                             <h3>${character.name}</h3>
-                             <p>${character.description}</p>`;
-  container.appendChild(characterCard);
+  const characterItem = document.createElement('div');
+  characterItem.classList.add('character-item');
+  characterItem.innerHTML = `<img src="${character.image}" alt="${character.name}">
+                             <h4 class="character-title">${character.name}</h4>
+                             <p class="character-series">${character.series}</p>`;
+  container.appendChild(characterItem);
 }
 
 // Example display function for tv shows

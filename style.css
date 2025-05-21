@@ -271,13 +271,13 @@ body {
     margin: 0;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Added text shadow */
 }
-/* Hero Section */
+/* Index Hero Section */
 .hero {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 2rem 0;
-    min-height: 100vh;
+    min-height: 50vh;
     background-color: #1c1c1c;
     position: relative;
     overflow: hidden;
@@ -401,14 +401,14 @@ body {
     padding: 0 1rem;
 }
 
-.hero-section { /* Re-using the existing hero-section class */
+.movie-hero-section { /* Re-using the existing hero-section class */
     position: relative;
     height: 450px; /* Adjusted height to accommodate title */
     overflow: hidden;
     margin-bottom: 2rem;
 }
 
-.hero-background { /* Re-using the existing hero-background class */
+.movie-hero-background { /* Re-using the existing hero-background class */
     position: absolute;
     top: 0;
     left: 0;
@@ -420,7 +420,7 @@ body {
     z-index: 0;
 }
 
-.hero-content { /* Re-using the existing hero-content class */
+.movie-detail-content { /* Re-using the existing hero-content class */
     position: relative;
     z-index: 1;
     display: flex;
@@ -430,7 +430,7 @@ body {
     height: 100%;
 }
 
-.hero-content h1 {
+.movie-detail-content h1 {
     font-size: 3rem;
     margin: 0 0 0.5rem 0;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
@@ -658,7 +658,8 @@ body {
 .music-playlist-section h2,
 .latest-characters-section h2,
 .marvel-characters-section h2,
-.other-characters-section h2
+.other-characters-section h2,
+.blog-posts h2
 {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
@@ -727,7 +728,6 @@ body {
 
 .movie-item img, .character-item img {
     width: 100%;
-    height: auto;
     border-radius: 8px;
 }
 

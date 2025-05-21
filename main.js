@@ -1104,9 +1104,9 @@ document.addEventListener('DOMContentLoaded', function () {
         tvShowItem.innerHTML = `
           <a href="tvshows-detail.html?id=${tvshows.id}">
             <img src="${tvshows.imageUrl || 'placeholder.jpg'}" alt="${tvshows.title || 'No Title'}">
+            </a>
             <p class="tv-show-title">${tvshows.title || 'No Title'}</p>
             <p class="tv-show-release">${tvshows.releaseDate ? new Date(tvshows.releaseDate.seconds * 1000).toLocaleDateString() : (tvshows.releaseYear || 'No Date')}</p>
-          </a>
         `;
         container.appendChild(tvShowItem);
       });
@@ -1138,22 +1138,19 @@ document.addEventListener('DOMContentLoaded', function () {
         if (index === 0) platform = 'Disney+';
         else if (index === 1) platform = 'disneyplus-other';
         else if (index === 2) platform = 'Disney+';
-        
-        // Determine the current page for this specific section. This requires a separate counter for each section.
-        // For simplicity in this diff, we'll assume a single page counter for demonstration.
-        // A robust solution would involve mapping page counters to sections or platforms.
+
         const currentPage = parseInt(button.dataset.currentPage || 0);
         const newTvShows = await fetchTvShowsData('tvshows', tvShowsPerPage, currentPage * tvShowsPerPage, platform);
 
         if (newTvShows.length > 0) {
           const containerSelector = `.tv-shows-grid-section:nth-of-type(${index + 1}) .tv-show-grid`;
  displayTvShows(newTvShows, containerSelector, true);
- button.dataset.currentPage = currentPage + 1; // Update the page counter for this button
+ button.dataset.currentPage = currentPage + 1; 
         } else {
- button.style.display = 'none'; // Hide button if no more data
+ button.style.display = 'none'; 
         }
       });
- button.dataset.currentPage = 0; // Initialize page counter for each button
+ button.dataset.currentPage = 0; 
     });
   }
 });

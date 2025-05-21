@@ -420,28 +420,29 @@ document.addEventListener('DOMContentLoaded', function () {
         const movieItem = document.createElement('div');
         movieItem.classList.add('movie-item'); // Assuming you have a CSS class for movie items
         movieItem.innerHTML = `
-          <a href="movie-detail.html?id=${movie.id}">
-            <img src="${movie.imageUrl || 'placeholder.jpg'}" alt="${movie.title || 'No Title'}">
+          
+            <a href="movie-detail.html?id=${movie.id}"><img src="${movie.imageUrl || 'placeholder.jpg'}" alt="${movie.title || 'No Title'}"></a>
             <p class="movie-title">${movie.title || 'No Title'}</p>
-          </a>
+         
         `;
         container.appendChild(movieItem);
       });
     }
 
-    // Function to display news
+    // display news
     function displayNews(news, container) {
       if (!container) return;
-      container.innerHTML = ''; // Clear existing content
+      container.innerHTML = ''; 
       news.forEach(article => {
         const newsArticle = document.createElement('div');
-        newsArticle.classList.add('blog-post-item'); // Assuming you have a CSS class for news items
+        newsArticle.classList.add('blog-card'); 
         newsArticle.innerHTML = `
           <a href="news-detail.html?id=${article.id}">
             <img src="${article.imageUrl || 'placeholder.jpg'}" alt="${article.title || 'No Title'}">
-            <p class="article-title">${article.title || 'No Title'}</p>
-            <p class="article-date">${article.releaseDate ? new Date(article.releaseDate.seconds * 1000).toLocaleDateString() : 'No Date'}</p>
-          </a>
+            </a>
+            <h3 class="article-title">${article.title || 'No Title'}</h3>
+            
+          
         `;
         container.appendChild(newsArticle);
       });
@@ -897,15 +898,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
       characters.forEach(character => {
         const characterItem = document.createElement('div');
-        characterItem.classList.add('character-item', 'movie-card'); // Added movie-card class
+        characterItem.classList.add('character-item'); 
         characterItem.innerHTML = `
           <a href="characters-detail.html?id=${character.id}">
             <img src="${character.imageUrl || 'placeholder.jpg'}" alt="${character.characterName || 'No Name'}"></a>
-          <div class="movie-info">
-            <p class="movie-title">${character.characterName || 'No Name'}</p>
-            <p class="movie-date">${character.characterAlias || ''}</p>
-          </div>
           </a>
+            <div class="movie-info">
+            <p class="character-title">${character.characterName || 'No Name'}</p>
+            <p class="character-series">${character.characterAlias || 'No Alias'}</p>
+          </div>
+          
         `;
         container.appendChild(characterItem);
       });
@@ -938,7 +940,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (loadMoreButton) {
       loadMoreButton.addEventListener('click', async () => {
         const newCharacters = await fetchCharactersData(charactersPerPage, currentCharacterPage * charactersPerPage);
-        displayCharacters(newCharacters, '.marvel-characters-section .character-list', true); // Append new characters
+        displayCharacters(newCharacters, '.marvel-characters-section .character-list .other-characters-section .character-list', true); // Append new characters
         // Note: The load more button is only associated with the Marvel characters section in your current HTML structure.
         // If you want a separate load more for 'other' characters, you'll need another button and associated logic.
         currentCharacterPage++;
@@ -999,13 +1001,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
       news.forEach(article => {
         const newsArticle = document.createElement('div');
-        newsArticle.classList.add('blog-post-item');
+        newsArticle.classList.add('news-article');
         newsArticle.innerHTML = `
          <a href="news-detail.html?id=${article.id}">
             <img class="blog-post-image" src="${article.imageUrl || 'placeholder.jpg'}" alt="${article.title || 'No Title'}">
+            </a>
             <p class="article-date">${article.releaseDate ? new Date(article.releaseDate.seconds * 1000).toLocaleDateString() : 'No Date'}</p>
             <h1 class="article-title">${article.title || 'No Title'}</h1>
-          </a>
+        
         `;
         container.appendChild(newsArticle);
       });
@@ -1029,15 +1032,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // Load more button functionality for news sections
     loadMoreButtons.forEach(button => {
       button.addEventListener('click', async () => {
-        // Assuming the load more button is within a section that can identify the collection
-        const section = button.closest('section');
-        const category = section.classList.contains('latest-news-section') ? 'MOVIES' : 'TV SHOWS'; // Determine category based on section class
+       
+        const div = button.closest('div');
+        const category = div.classList.contains('news-article news-articles') ? 'MOVIES' : 'TV SHOWS'; // Determine category based on section class
         const newNews = await fetchNewsData('news', newsPerPage, currentNewsPage * newsPerPage, category); // Pass 'news' as collectionName and determined category
         if (newNews.length > 0) {
-          currentNewsPage++; // Increment page count only if new data is loaded
+          currentNewsPage++; 
         }
 
-        displayNewsArticles(newNews, `.${section.classList[0]} .news-articles`, true); // Append new articles
+        displayNewsArticles(newNews, `.${div.classList[0]} .character-list`, true); // Append new articles
         currentNewsPage++;
       });
     });

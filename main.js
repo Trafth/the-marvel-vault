@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   // Admin page logic
 
-  // Function to fetch and display data from selected collection for admin page
+  // collection for admin page
   async function fetchAndDisplayCollectionData(collectionName, dataListContainer, populateFormForEdit, editingDocId) {
     dataListContainer.innerHTML = 'Loading data...';
     try {
@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
           listItem.querySelector('.edit-data').addEventListener('click', async () => {
             editingDocId = doc.id;
-            // Populate form with data for editing
             populateFormForEdit(itemData);
           });
 
@@ -74,13 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Function to populate the form for editing
+  // Function form for editing
   function populateFormForEdit(data) {
     document.getElementById('title').value = data.title || '';
     document.getElementById('headline').value = data.headline || '';
     document.getElementById('contents').value = data.contents || '';
     document.getElementById('imageUrl').value = data.imageUrl || '';
-    document.getElementById('content').value = data.content || '';
     document.getElementById('description').value = data.description || '';
     document.getElementById('releaseYear').value = data.releaseYear || '';
     document.getElementById('cast').value = data.cast ? data.cast.join(', ') : '';
@@ -92,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('overviewImageUrl').value = data.overviewImageUrl || '';
     document.getElementById('producer').value = data.producer || '';
     document.getElementById('network').value = data.network || '';
-    document.getElementById('releaseDate').value = data.releaseDate ? new Date(data.releaseDate).toISOString().split('T')[0] : '';
+    document.getElementById('releaseDate').value = data.releaseDate ? new Date(data.releaseDate.seconds * 1000).toISOString().split('T')[0] : '';
     document.getElementById('synopsis').value = data.synopsis || '';
     document.getElementById('stageTeaserUrl').value = data.stageTeaserUrl || '';
     document.getElementById('category').value = data.category || '';
@@ -101,6 +99,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('synopsis').value = data.synopsis || '';
     document.getElementById('trailerUrl').value = data.trailerUrl || '';
     document.getElementById('author').value = data.author || '';
+    document.getElementById('run-time').value = data.runTime || '';
+    document.getElementById('rating').value = data.rating  || '';
+    document.getElementById('writtenBy').value = data.writtenBy  || '';
+    document.getElementById('platform1').value = data.platform1  || '';
+    document.getElementById('thumbnailPicture').value = data.thumbnailPicture || '';
   }
   if (currentPath.includes('admin.html')) {
 
@@ -110,10 +113,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let editingDocId = null;
     let currentCollection = collectionSelect.value;
 
-    // Function to update the current collection and show/hide fields
+    // Function to update 
  function updateCurrentCollection() {
       currentCollection = collectionSelect.value;
-      // Get references to all form field groups. Use optional chaining in case element doesn't exist.
+      
       const titleGroup = document.getElementById('title')?.parentElement;
       const headlineGroup = document.getElementById('headline')?.parentElement;
       const contentsGroup = document.getElementById('contents')?.parentElement;
@@ -124,7 +127,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const executiveProducersGroup = document.getElementById('executiveProducers')?.parentElement;
       const imageUrlGroup = document.getElementById('imageUrl')?.parentElement;
       const musicByGroup = document.getElementById('musicBy')?.parentElement;
-      const contentGroup = document.getElementById('content')?.parentElement;
       const descriptionGroup = document.getElementById('description')?.parentElement;
       const overviewImageUrlGroup = document.getElementById('overviewImageUrl')?.parentElement;
       const producerGroup = document.getElementById('producer')?.parentElement;
@@ -141,85 +143,95 @@ document.addEventListener('DOMContentLoaded', function () {
       const categoryGroup = document.getElementById('category')?.parentElement;
       const platformGroup = document.getElementById('platform')?.parentElement;
       const universeGroup = document.getElementById('universe')?.parentElement;
-
-      // Put all potential field groups into an array for easier hiding
+      const runTimeGroup = document.getElementById('run-time')?.parentElement;
+      const ratingGroup = document.getElementById('rating')?.parentElement;
+      const writtenByGroup = document.getElementById('writtenBy')?.parentElement;
+      const platform1Group = document.getElementById('platform1')?.parentElement
+      
       const allFieldGroups = [
         titleGroup, headlineGroup, contentsGroup, thumbnailPictureGroup,
-        contentGroup, descriptionGroup, characterAliasGroup,
+        descriptionGroup, characterAliasGroup,
         characterNameGroup, castGroup, coProducerGroup,
         executiveProducersGroup, imageUrlGroup, musicByGroup,
-        overviewImageUrlGroup, producerGroup, releaseYearGroup, stageTeaserUrlGroup, thumbnailPictureGroup,
- categoryGroup, platformGroup, universeGroup, synopsisGroup,
-      ].filter(group => group !== null && group !== undefined); // Filter out any groups that weren't found
+        overviewImageUrlGroup, producerGroup, releaseYearGroup, stageTeaserUrlGroup,
+        categoryGroup, platformGroup, universeGroup, synopsisGroup, networkGroup, releaseDateGroup, trailerUrlGroup,
+        directorGroup, heroImageUrlGroup, authorGroup, runTimeGroup, ratingGroup, writtenByGroup, platform1Group
+      ].filter(group => group !== null && group !== undefined); 
 
-      // Hide all fields initially
+  
  allFieldGroups.forEach(group => {
  group.style.display = 'none';
  });
 
-      // Show fields based on the current collection
+   
       const isNewsCollection = currentCollection === 'news';
       const isMovieCollection = currentCollection === 'movies';
       const isTVShowCollection = currentCollection === 'tvshows';
       const isCharacterCollection = currentCollection === 'characters';
 
       if (isNewsCollection) {
- if (titleGroup) titleGroup.style.display = 'block'; // Show title for News
+        if (titleGroup) titleGroup.style.display = 'block'; // Show title for News
         if (headlineGroup) headlineGroup.style.display = 'block';
         if (contentsGroup) contentsGroup.style.display = 'block';
         if (thumbnailPictureGroup) thumbnailPictureGroup.style.display = 'block';
         if (imageUrlGroup) imageUrlGroup.style.display = 'block';
- if (categoryGroup) categoryGroup.style.display = 'block';
         if (authorGroup) authorGroup.style.display = 'block';
+        if (releaseDateGroup) releaseDateGroup.style.display = 'block';
+        if (platform1Group) platform1Group.style.display = 'block';
 
       } else if (isMovieCollection) {
- if (titleGroup) titleGroup.style.display = 'block'; // Show title for Movies
+        if (titleGroup) titleGroup.style.display = 'block';
         if (imageUrlGroup) imageUrlGroup.style.display = 'block';
         if (descriptionGroup) descriptionGroup.style.display = 'block';
         if (releaseYearGroup) releaseYearGroup.style.display = 'block';
         if (castGroup) castGroup.style.display = 'block';
- if (coProducerGroup) coProducerGroup.style.display = 'block';
+        if (coProducerGroup) coProducerGroup.style.display = 'block';
         if (directorGroup) directorGroup.style.display = 'block';
         if (executiveProducersGroup) executiveProducersGroup.style.display = 'block';
- if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
+        if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
         if (musicByGroup) musicByGroup.style.display = 'block';
         if (overviewImageUrlGroup) overviewImageUrlGroup.style.display = 'block';
         if (producerGroup) producerGroup.style.display = 'block';
- if (releaseDateGroup) releaseDateGroup.style.display = 'block';
+        if (releaseDateGroup) releaseDateGroup.style.display = 'block';
         if (stageTeaserUrlGroup) stageTeaserUrlGroup.style.display = 'block';
         if (synopsisGroup) synopsisGroup.style.display = 'block';
- if (trailerUrlGroup) trailerUrlGroup.style.display = 'block';
+        if (trailerUrlGroup) trailerUrlGroup.style.display = 'block';
+        if (categoryGroup) categoryGroup.style.display = 'block';
+        if (runTimeGroup) runTimeGroup.style.display = 'block';
+        if (ratingGroup) ratingGroup.style.display = 'block';
+        if (writtenByGroup) writtenByGroup.style.display = 'block';
 
 
       } else if (isTVShowCollection) {
- if (titleGroup) titleGroup.style.display = 'block'; // Show title for TV Shows
+        if (titleGroup) titleGroup.style.display = 'block';
         if (directorGroup) directorGroup.style.display = 'block';
- if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
+        if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
         if (networkGroup) networkGroup.style.display = 'block';
- if (releaseDateGroup) releaseDateGroup.style.display = 'block';
- if (trailerUrlGroup) trailerUrlGroup.style.display = 'block';
+        if (releaseDateGroup) releaseDateGroup.style.display = 'block';
+        if (trailerUrlGroup) trailerUrlGroup.style.display = 'block';
         if (imageUrlGroup) imageUrlGroup.style.display = 'block';
         if (synopsisGroup) synopsisGroup.style.display = 'block';
- if (platformGroup) platformGroup.style.display = 'block';
+        if (platformGroup) platformGroup.style.display = 'block';
 
       } else if (isCharacterCollection) {
- if (titleGroup) titleGroup.style.display = 'block'; // Show title for Characters
+        if (titleGroup) titleGroup.style.display = 'block'; 
         if (characterAliasGroup) characterAliasGroup.style.display = 'block';
- if (characterNameGroup) characterNameGroup.style.display = 'block';
- if (universeGroup) universeGroup.style.display = 'block';
- if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
+        if (characterNameGroup) characterNameGroup.style.display = 'block';
+        if (universeGroup) universeGroup.style.display = 'block';
+        if (heroImageUrlGroup) heroImageUrlGroup.style.display = 'block';
         if (imageUrlGroup) imageUrlGroup.style.display = 'block';
         if (synopsisGroup) synopsisGroup.style.display = 'block';
+        if (universeGroup) universeGroup.style.display = 'block';
       }
 
       fetchAndDisplayCollectionData(currentCollection, dataListContainer, populateFormForEdit, editingDocId);
     }
 
 
-    // Initial collection load
+   
     updateCurrentCollection();
 
-    // Listen for changes in the collection selection
+    
     collectionSelect.addEventListener('change', updateCurrentCollection);
 
     if (dataForm && dataListContainer && collectionSelect) {
@@ -228,21 +240,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const collectionName = collectionSelect.value;
 
-        // Generic data collection from the form
+     
         const data = {
- // Initialize data object with common fields
+ 
  title: document.getElementById('title').value.trim(),
         };
 
- // Add collection-specific fields
+
  if (collectionName === 'news') {
  data.headline = document.getElementById('headline').value.trim();
  data.contents = document.getElementById('contents').value.trim();
  data.thumbnailPicture = document.getElementById('thumbnailPicture').value.trim();
  data.author = document.getElementById('author').value.trim();
+ data.platform1 = document.getElementById('platform1').value.trim();
+ 
+} else if (collectionName === 'characters') {
  data.category = document.getElementById('category').value.trim();
- } else if (collectionName === 'characters') {
-          // Add fields relevant to characters
+
+} else if (collectionName === 'movies') {
+ data.category = document.getElementById('category').value.trim();
+ data.runTime = document.getElementById('run-time').value.trim();
+ data.rating = document.getElementById('rating').value.trim();
+ data.writtenBy = document.getElementById('writtenBy').value.trim();
+
+} else if (collectionName === 'tvshows') {
  data.characterAlias = document.getElementById('characterAlias').value.trim();
  data.characterName = document.getElementById('characterName').value.trim();
  data.heroImageUrl = document.getElementById('heroImageUrl').value.trim();
@@ -250,11 +271,11 @@ document.addEventListener('DOMContentLoaded', function () {
  data.synopsis = document.getElementById('synopsis').value.trim();
  data.universe = document.getElementById('universe').value.trim();
  }
- // Add fields relevant to other collections
+
  else {
- // Add fields relevant to other collections if they exist
+ 
  data.imageUrl = document.getElementById('imageUrl').value.trim();
- data.description = document.getElementById('description').value.trim(); // Keep description for other collections
+ data.description = document.getElementById('description').value.trim(); 
  data.releaseYear = document.getElementById('releaseYear').value ? parseInt(document.getElementById('releaseYear').value) : null;
  data.cast = document.getElementById('cast').value ? document.getElementById('cast').value.split(',').map(item => item.trim()) : [];
  data.coProducer = document.getElementById('coProducer').value.trim();
@@ -305,11 +326,11 @@ document.addEventListener('DOMContentLoaded', function () {
       categoryGrid.addEventListener('click', (event) => {
         if (event.target.classList.contains('category-item')) {
           event.preventDefault();
-          // Remove active class from other categories
+          
           document.querySelectorAll('.category-item').forEach(item => {
             item.classList.remove('active');
           });
-          // Add active class to selected category
+          
           event.target.classList.add('active');
           selectedCategory = event.target.dataset.category;
           performSearch(searchInput.value.trim(), selectedCategory);
@@ -386,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
     const moviesGrid = document.querySelector('.movies .movie-grid');
     const blogGrid = document.querySelector('.blog-posts .blog-grid');
-    const itemsPerSection = 4; // Number of items to display in each section
+    const itemsPerSection = 4; 
 
     // Function to fetch latest movies
     async function fetchLatestMovies(limit) {
@@ -415,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to display movies
     function displayMovies(movies, container) {
       if (!container) return;
-      container.innerHTML = ''; // Clear existing content
+      container.innerHTML = ''; 
       movies.forEach(movie => {
         const movieItem = document.createElement('div');
         movieItem.classList.add('movie-item'); // Assuming you have a CSS class for movie items
@@ -448,33 +469,35 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // Fetch and display data on page load
+   
     fetchLatestMovies(itemsPerSection).then(movies => displayMovies(movies, moviesGrid));
     fetchLatestNews(itemsPerSection).then(news => displayNews(news, blogGrid));
   }
 
   // Movies Page
   else if (window.location.pathname.includes('movies.html')) {
-    const itemsPerSection = 4; // Number of news items to display
-    const marvelMoviesGrid = document.querySelector('.movies-page-container .movies .movie-grid'); // Assuming the first section is "Marvel Movies"
-    const otherMoviesGrid = document.querySelector('.movies-page-container .other-movies .movie-grid'); // Assuming the second section is "Other Movies"
-    const loadMoreButtons = document.querySelectorAll('.movies-page-container .load-more');
-    const latestNewsBlogGrid = document.querySelector('.movies-page-container .latest-news-section .blog-grid');
-    const moviesPerPage = 12; // Number of movies to load per page
+    const marvelMovieGridContainer = document.querySelector('.movies .marvel-movie-grid'); // Container for Marvel Movies
+    const otherMovieGridContainer = document.querySelector('.other-movies-section .other-movie-grid');  // Container for Other Movies
+    const loadMoreMarvelButton = document.getElementById('load-more-marvel-movies');
+    const loadMoreOtherButton = document.getElementById('load-more-other-movies');
+    const moviesPerPage = 8; // Number of movies to load per page
+    let currentMoviesPage = 0; 
 
-    async function fetchMoviesData(collectionName, limit, offset, category = null) {
-      try {
-        let query = db.collection(collectionName);
-        if (category) {
-          query = query.where('category', '==', category);
-        }
-        query = query.orderBy('releaseYear', 'desc').limit(limit);
+async function fetchMoviesData( collectionName, limit, offset, category = null) {
+try {
+console.log(`Fetching movies: collection=${collectionName}, limit=${limit}, offset=${offset}, category=${category}`); // Debugging log
+let query = db.collection(collectionName);
+if (category) {
+query = query.where('category', '==', category);
+}
+query = query.orderBy('releaseDate', 'desc').limit(limit);
         if (offset > 0) {
           const lastDocSnapshot = await db.collection(collectionName).orderBy('releaseYear', 'desc').limit(offset).get();
           let lastDoc = null;
           if (!lastDocSnapshot.empty) {
             lastDoc = lastDocSnapshot.docs[lastDocSnapshot.docs.length - 1];
           } else {
+            // If offset is greater than available documents, return empty
             console.warn(`Offset ${offset} is beyond the number of documents in '${collectionName}'.`);
             return [];
           }
@@ -482,27 +505,80 @@ document.addEventListener('DOMContentLoaded', function () {
           if (category) {
             query = query.where('category', '==', category);
           }
-          query = query.orderBy('releaseYear', 'desc').startAfter(lastDoc).limit(limit);
-        }
+          query = query.orderBy('releaseDate', 'desc').startAfter(lastDoc).limit(limit);
+  }
         const querySnapshot = await query.get();
-        const moviesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        return moviesData;
+        console.log(`Fetched ${querySnapshot.docs.length} movies for offset ${offset}`); // Debugging log
+        const tvShowsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        return tvShowsData;
       } catch (error) {
-        console.error('Error fetching movies: ', error);
+        console.error('Error fetching Movies: ', error);
         return [];
       }
     }
+ function displayMovies(movies, containerSelector, append = false) {
+    const container = document.querySelector(containerSelector);
+      if (!container) {
+        console.error(`Element with selector ${containerSelector} not found.`);
+        return;
+      }
 
-    // Initial load of Marvel Movies
-    if (marvelMoviesGrid) {
-      fetchMoviesData('movies', moviesPerPage, 0, 'marvel').then(movies => { // Assuming 'marvel' category for Marvel Movies
-        displayMovies(movies, '.movies-page-container .movies .movie-grid');
+      if (!append) {
+        container.innerHTML = ''; // Clear existing content if not appending
+      }
+
+      movies.forEach(movie => {
+        const movieItem = document.createElement('div');
+        movieItem.classList.add('movie-card'); // Assuming you have a CSS class for movie items
+        movieItem.innerHTML = `
+          <a href="movie-detail.html?id=${movie.id}">
+            <img src="${movie.imageUrl || 'placeholder.jpg'}" alt="${movie.title || 'No Title'}"></a>
+            <div class="movie-info">
+            <p class="movie-title">${movie.title || 'No Title'}</p>
+            <p class="movie-date">${movie.releaseYear || 'No Date'}</p>
+            </div>
+        `;
+        container.appendChild(movieItem);
       });
     }
 
-    fetchLatestNews(itemsPerSection).then(news => displayNews(news, latestNewsBlogGrid));
-  }
+    // Initial load of Marvel Movies
+    if (marvelMovieGridContainer) {
+      console.log('Marvel movie grid container found. Fetching Marvel movies.'); // Debugging log
+      fetchMoviesData('movies', moviesPerPage, 0, 'marvel').then(movies => {
+        console.log('fetchMoviesData (marvel) returned movies:', movies); // Debugging log
+        displayMovies(movies, '.movies .marvel-movie-grid');
+        currentMoviesPage = 1; // Set initial page to 1 after first load
+      }).catch(error => console.error('Error fetching initial Marvel movies:', error));
+    }
 
+    // Initial load of Other Movies
+    if (otherMovieGridContainer) {
+ console.log('Other movie grid container found. Fetching Other movies.'); // Debugging log
+      fetchMoviesData('movies', moviesPerPage, 0, 'other').then(movies => { // Fetch other movies
+        console.log('fetchMoviesData (other) returned movies:', movies); // Debugging log
+ displayMovies(movies, '.other-movies-section .other-movie-grid');
+      }).catch(error => console.error('Error fetching initial Other movies:', error));
+    }
+
+    // Load more button functionality for Marvel Movies
+    if (loadMoreMarvelButton) {
+ loadMoreMarvelButton.addEventListener('click', async () => {
+ const newMovies = await fetchMoviesData('movies', moviesPerPage, currentMoviesPage * moviesPerPage, 'marvel');
+ displayMovies(newMovies, '.movies .marvel-movie-grid', true); // Append new movies to Marvel container
+ currentMoviesPage++;
+      });
+    }
+
+    // Load more button functionality for Other Movies
+    if (loadMoreOtherButton) {
+ loadMoreOtherButton.addEventListener('click', async () => {
+ const newMovies = await fetchMoviesData('movies', moviesPerPage, currentMoviesPage * moviesPerPage, 'other'); // Fetch next page of other movies
+ displayMovies(newMovies, '.other-movies-section .other-movie-grid', true); // Append new movies to Other container
+ currentMoviesPage++; // Assuming shared pagination for simplicity, adjust if separate pagination is needed
+ });
+    }
+  }
   // Movie Detail Page
   else if (window.location.pathname.includes('movie-detail.html')) {
     const movieDetailContainer = document.querySelector('.movie-detail-container');
@@ -526,18 +602,18 @@ document.addEventListener('DOMContentLoaded', function () {
         if (doc.exists) {
           const movieData = doc.data();
 
-          // Get references to HTML elements for movie details
+          //  elements for movie details
           const heroBackground = document.querySelector('.hero-section');
-          const mainTitleElement = document.getElementById('movie-title'); // Assuming you have an element with this ID for the main title
+          const mainTitleElement = document.getElementById('movie-title'); 
           const directorNameElement = document.getElementById('director-name');
           const castListElement = document.getElementById('cast-list');
           const executiveProducersListElement = document.getElementById('executive-producers-list');
           const producerNameElement = document.getElementById('producer-name');
           const coProducerNameElement = document.getElementById('co-producer-name');
           const musicByNameElement = document.getElementById('music-by-name');
-          const releaseYearTextElement = document.getElementById('release-year-text'); // Assuming you have an element with this ID
+          const releaseYearTextElement = document.getElementById('release-year-text');
           const overviewPosterElement = document.getElementById('overview-poster');
-          const trailerIframeElement = document.getElementById('movie-trailer'); // Assuming you have an iframe with this ID
+          const trailerIframeElement = document.getElementById('movie-trailer'); 
           const overviewImageElement = document.getElementById('overview-poster');
 
           // Populate elements with movie data
@@ -554,7 +630,7 @@ document.addEventListener('DOMContentLoaded', function () {
  if (Array.isArray(movieData.cast)) {
  castListElement.textContent = movieData.cast.join(', ');
  } else {
- castListElement.textContent = movieData.cast; // Handle cases where cast might not be an array
+ castListElement.textContent = movieData.cast; 
  }
           }
 
@@ -574,16 +650,6 @@ document.addEventListener('DOMContentLoaded', function () {
           if (releaseYearTextElement) {
             releaseYearTextElement.textContent = `Release Year: ${movieData.releaseYear}` || 'Release Year not available';
           }
-          // You might want to format releaseDate if you're displaying it
-          // if (document.getElementById('release-date-text')) {
-          //   const releaseDate = movieData.releaseDate ? new Date(movieData.releaseDate.seconds * 1000) : null;
-          //   if (releaseDate) {
-          //     document.getElementById('release-date-text').textContent = `Release Date: ${releaseDate.toLocaleDateString()}`;
-          //   } else {
-          //     document.getElementById('release-date-text').textContent = 'Release Date not available';
-          //   }
-          // }
-
 
           if (overviewPosterElement) overviewPosterElement.src = movieData.imageUrl || 'placeholder.jpg';
 
@@ -862,7 +928,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const marvelCharactersGrid = document.querySelector('.marvel-characters-section .character-list');
     const otherCharactersGrid = document.querySelector('.other-characters-section .character-list');
     const loadMoreButton = document.querySelector('.characters-page-container .load-more');
- const charactersPerPage = 12; // Number of characters to load per page
+ const charactersPerPage = 12; 
     let currentCharacterPage = 0;
 
     async function fetchCharactersData(limit, offset, universe = null) {
@@ -1048,9 +1114,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // TV Shows Page
   else if (window.location.pathname.includes('tvshows.html')) {
-    const marvelTvShowsGrid = document.querySelector('.tv-shows-grid-section:nth-of-type(1) .tv-show-grid'); // Assuming the first section is Marvel on Disney+
-    const moreFromDisneyGrid = document.querySelector('.tv-shows-grid-section:nth-of-type(2) .tv-show-grid'); // Assuming the second section is More from Disney+
-    const marvelSeriesGrid = document.querySelector('.tv-shows-grid-section:nth-of-type(3) .tv-show-grid'); // Assuming the third section is Marvel Series on Disney+
+    const marvelTvShowsGrid = document.querySelector('.tv-shows-grid-section:nth-of-type(1) .tv-show-grid'); 
+    const moreFromDisneyGrid = document.querySelector('.tv-shows-grid-section:nth-of-type(2) .tv-show-grid');
+    const marvelSeriesGrid = document.querySelector('.tv-shows-grid-section:nth-of-type(3) .tv-show-grid'); 
     const loadMoreButtons = document.querySelectorAll('.tv-shows-grid-section .load-more');
     const tvShowsPerPage = 12; // Number of TV shows to load per page
     let currentTvShowsPage = 0;
@@ -1115,7 +1181,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial load of TV shows for each section
     if (marvelTvShowsGrid) {
       fetchTvShowsData('tvshows', tvShowsPerPage, 0, 'Disney+').then(tvshows => {
- displayTvShows(tvshows, '.tv-shows-grid-section:nth-of-type(1) .tv-show-grid');
+      displayTvShows(tvshows, '.tv-shows-grid-section:nth-of-type(1) .tv-show-grid');
       });
     }
 

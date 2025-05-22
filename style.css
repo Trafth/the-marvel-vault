@@ -323,18 +323,30 @@ body {
 }
 
 /* Movie Grid Section */
-.movies {
+.movies  {
     padding: 2rem;
     background-color: #1a1a1a;
     text-align: center;
 }
 
-.movie-grid {
+.other-movies-section  {
+    padding: 2rem;
+    background-color: #1a1a1a;
+    text-align: center;
+}
+.movie-grid  {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1.5rem;
     margin-top: 1rem;
 }
+.other-movie-grid  {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
 
 .movie-card img {
     width: 100%;

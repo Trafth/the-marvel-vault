@@ -50,27 +50,20 @@
       </div>
 
       <form id="dataForm">
-        <div class="form-group">
-          <label for="title">Title:</label>
- <input type="text" id="title">
-        </div>
-
- <!-- New fields for dynamic content -->
- <div class="form-group">
- <label for="category">Category:</label>
- <input type="text" id="category">
- </div>
+ <!-- Characters -->
+  <div class="form-group">
+    <label for="universe">Universe:</label>
+    <select id="universe">
+      <option value="marvel">Marvel</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
 
  <div class="form-group">
- <label for="platform">Platform:</label>
- <input type="text" id="platform">
+  <label for="title">Title:</label>
+  <input type="text" id="title">
  </div>
 
- <div class="form-group">
- <label for="universe">Universe:</label>
- <input type="text" id="universe">
- </div>
- <!-- Fields for Characters -->
  <div class="form-group">
  <label for="characterName">Character Name:</label>
  <input type="text" id="characterName">
@@ -80,16 +73,16 @@
  <label for="characterAlias">Character Alias:</label>
  <input type="text" id="characterAlias">
  </div>
- <!-- Fields for News -->
-        <div class="form-group">
-          <label for="author">Author:</label>
- <input type="text" id="author">
-        </div>
+ <!-- News -->
+<div class="form-group">
+<label for="author">Author:</label>
+<input type="text" id="author">
+</div>
 
-        <div class="form-group">
- <label for="headline">Headline:</label>
- <input type="text" id="headline">
-        </div>
+<div class="form-group">
+<label for="headline">Headline:</label>
+<input type="text" id="headline">
+</div>
 
  <div class="form-group">
  <label for="contents">Contents:</label>
@@ -106,10 +99,7 @@
  <input type="url" id="imageUrl">
         </div>
 
-        <div class="form-group">
-          <label for="content">Content:</label>
- <textarea id="content"></textarea>
-        </div>
+
 
         <div class="form-group">
           <label for="description">Description:</label>
@@ -185,6 +175,40 @@
         <div class="form-group">
           <label for="trailerUrl">Trailer URL:</label>
  <input type="url" id="trailerUrl">
+        </div>
+
+        <div class="form-group">
+        <label for="run-time">Run Time:</label>
+        <input type="text" id="run-time">
+        </div>
+
+        <div class="form-group">
+          <label for="platform">Platform:</label>
+          <input type="text" id="platform">
+          </div>
+        <div class="form-group">
+        <label for="rating">Rating:</label>
+        <input type="text" id="rating">
+        </div>    
+
+        <div class="form-group">
+        <label for="category">Category:</label>
+        <select id="category">
+          <option value="marvel">Marvel</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+         <div class="form-group">
+        <label for="platform1">Type:</label>
+        <select id="platform1">
+          <option value="MOVIES">Movies</option>
+          <option value="TV SHOWS">Tv shows</option>
+        </select>
+        </div>
+
+        <div class="form-group">
+        <label for="writtenBy">Written By:</label>
+        <input type="text" id="writtenBy">
         </div>
 
         <button type="submit">Add Data</button>

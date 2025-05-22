@@ -9,8 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <!-- Firebase Modular SDK (compat build) scripts from CDN -->
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
   <script type="module" src="main.js"></script>
@@ -46,28 +44,21 @@
       </div>
     </section>
 
-    <!-- Latest Movies News Section -->
-    <section class="latest-news-section">
-     
-      <div class="blog-grid">
-        
-    </section>
 
-    <!-- Marvel Movies Section -->
     <section class="movies">
       <h2>Marvel Movies</h2>
-      <div class="movie-grid">
+      <div class="movie-grid marvel-movie-grid">
       </div>
-       <div class="view-all-button">
-        <button>View All</button>
-      </div>
+      <button id="load-more-marvel-movies" class="load-more">Load More</button>
     </section>
 
      <!-- Other Movies Section -->
-    <section class="movies">
+    <section class="other-movies-section">
       <h2>Other Movies</h2>
       <div class="other-movie-grid">
-        <!-- Other movies will be loaded here by JavaScript -->
+
+      </div>
+       <button id="load-more-other-movies" class="load-more">Load More</button>
       </div>
     </section>
 
@@ -78,67 +69,5 @@
     <p>&copy; 2025 TheMarvelVault. All rights reserved.</p>
   </footer>
 
-  <script type="module">
-    // Your dynamic movie loading script.
-    // This script will now rely on the global 'firebase' object
-    // provided by the compat SDK scripts loaded above.
-    import { db } from './firebase-config.js'; // Import db from your firebase-config.js module
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const marvelMovieGridContainer = document.querySelector('.movie-grid'); // Container for Marvel Movies
-      const otherMovieGridContainer = document.querySelector('.other-movie-grid'); // Container for Other Movies
-
-      // Function to fetch and display movies
-      const fetchAndDisplayMovies = async (collectionName, containerElement) => {
-        if (!containerElement || typeof db === 'undefined') {
-          console.error("Container element not found or Firestore not initialized.");
-          return;
-        }
-
-        try {
-          const snapshot = await db.collection(collectionName).get();
-
-          if (snapshot.empty) {
-            console.log(`No movies found in collection: ${collectionName}`);
-            containerElement.innerHTML = `<p>No movies available in ${collectionName} yet.</p>`;
-            return;
-          }
-
-          // Clear existing hardcoded content
-          containerElement.innerHTML = '';
-
-          snapshot.forEach(doc => {
-            const movieData = doc.data();
-            const movieId = doc.id; // Get the unique document ID
-
-            // Create the HTML for the movie card
-            const movieCardHTML = `
-              <a href="movie-detail.html?id=${movieId}">
-                <div class="movie-card">
-                  <img src="${movieData.imageUrl}" alt="${movieData.title}"></a>
-                  <div class="movie-info">
-                    <p class="movie-title">${movieData.title}</p>
-                    <p class="movie-date">${movieData.releaseYear || ''}</p> <!-- Using releaseYear based on your data -->
-                  </div>
-                </div>
-            
-            `;
-                
-            containerElement.innerHTML += movieCardHTML;
-          });
-        } catch (err) {
-          console.error('Error getting documents:', err);
-          // Handle errors
-        }
-      };
-
-      // Fetch and display movies from your Firestore collections
-      // Replace 'movies' and 'otherMovies' with your actual collection names
-      fetchAndDisplayMovies('movies', marvelMovieGridContainer); // Assuming all movies are in the 'movies' collection for now
-      // If you have a different collection for 'Other Movies' or a way to filter, uncomment and adjust this line:
-      // fetchAndDisplayMovies('otherMovies', otherMovieGridContainer);
-    });
-
-  </script>
 </body>
 </html>

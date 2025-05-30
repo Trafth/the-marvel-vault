@@ -12,7 +12,6 @@
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
   <script type="module" src="main.js"></script>
-  <script type="module" src="firebase-config.js"></script>
 </head>
 
 <body>
@@ -49,177 +48,183 @@
         </select>
       </div>
 
-      <form id="dataForm">
- <!-- Characters -->
+  <form id="dataForm">
   <div class="form-group">
-    <label for="universe">Universe:</label>
-    <select id="universe">
-      <option value="marvel">Marvel</option>
-      <option value="other">Other</option>
-    </select>
+  <label for="universe">Universe:</label>
+  <select id="universe">
+  <option value="marvel">Marvel</option>
+  <option value="other">Other</option>
+  </select>
   </div>
 
- <div class="form-group">
+  <div class="form-group">
   <label for="title">Title:</label>
   <input type="text" id="title">
- </div>
+  </div>
 
- <div class="form-group">
- <label for="characterName">Character Name:</label>
- <input type="text" id="characterName">
- </div>
+  <div class="form-group">
+  <label for="characterName">Character Name:</label>
+  <input type="text" id="characterName">
+  </div>
 
- <div class="form-group">
- <label for="characterAlias">Character Alias:</label>
- <input type="text" id="characterAlias">
- </div>
- <!-- News -->
-<div class="form-group">
-<label for="author">Author:</label>
-<input type="text" id="author">
-</div>
+  <div class="form-group">
+  <label for="characterAlias">Character Alias:</label>
+  <input type="text" id="characterAlias">
+  </div>
 
-<div class="form-group">
-<label for="headline">Headline:</label>
-<input type="text" id="headline">
-</div>
+  <div class="form-group">
+  <label for="author">Author:</labe>
+  <input type="text" id="author">
+  </div>
 
- <div class="form-group">
- <label for="contents">Contents:</label>
- <textarea id="contents"></textarea>
-        </div>
+  <div class="form-group">
+  <label for="headline">Headline:</label>
+  <input type="text" id="headline">
+  </div>
 
- <div class="form-group">
- <label for="thumbnailPicture">Thumbnail Picture URL:</label>
- <input type="url" id="thumbnailPicture">
-        </div>
+  <div class="form-group">
+  <label for="contents">Contents:</label>
+  <textarea id="contents"></textarea>
+  </div>
 
-        <div class="form-group">
-          <label for="imageUrl">Image URL:</label>
- <input type="url" id="imageUrl">
-        </div>
+  <div class="form-group">
+  <label for="articlecontents">Article Contents:</label>
+  <textarea id="articlecontents"></textarea>
+  </div>
 
 
+  <div class="form-group">
+  <label for="thumbnailPicture">Thumbnail Picture URL:</label>
+  <input type="url" id="thumbnailPicture">
+  </div>
 
-        <div class="form-group">
-          <label for="description">Description:</label>
- <textarea id="description"></textarea>
-        </div>
+  <div class="form-group">
+  <label for="imageUrl">Image URL:</label>
+  <input type="url" id="imageUrl">
+  </div>
 
- <!-- Fields primarily for Movies/TV Shows -->
-        <div class="form-group">
-          <label for="cast">Cast (comma-separated):</label>
- <input type="text" id="cast">
-        </div>
 
-        <div class="form-group">
-          <label for="coProducer">Co-Producer:</label>
- <input type="text" id="coProducer">
-        </div>
 
-        <div class="form-group">
-          <label for="director">Director:</label>
- <input type="text" id="director">
-        </div>
+  <div class="form-group">
+  <label for="description">Description:</label>
+  <textarea id="description"></textarea>
+  </div>
 
- <div class="form-group">
- <label for="network">Network:</label>
- <input type="text" id="network">
- </div>
+  <div class="form-group">
+  <label for="cast">Cast (comma-separated):</label>
+  <input type="text" id="cast">
+  </div>
 
-        <div class="form-group">
-          <label for="executiveProducers">Executive Producers (comma-separated):</label>
- <input type="text" id="executiveProducers">
-        </div>
+  <div class="form-group">
+  <label for="coProducer">Co-Producer:</label>
+  <input type="text" id="coProducer">
+  </div>
 
-        <div class="form-group">
-          <label for="heroImageUrl">Hero Image URL:</label>
- <input type="url" id="heroImageUrl">
-        </div>
+  <div class="form-group">
+  <label for="director">Director:</label>
+  <input type="text" id="director">
+  </div>
 
-        <div class="form-group">
-          <label for="musicBy">Music By:</label>
- <input type="text" id="musicBy">
-        </div>
+  <div class="form-group">
+  <label for="network">Network:</label>
+  <input type="text" id="network">
+  </div>
 
-        <div class="form-group">
-          <label for="overviewImageUrl">Overview Image URL:</label>
- <input type="url" id="overviewImageUrl">
-        </div>
+  <div class="form-group">
+  <label for="executiveProducers">Executive Producers (comma-separated):</label>
+  <input type="text" id="executiveProducers">
+  </div>
 
-        <div class="form-group">
-          <label for="producer">Producer:</label>
- <input type="text" id="producer">
-        </div>
+  <div class="form-group">
+  <label for="heroImageUrl">Hero Image URL:</label>
+  <input type="url" id="heroImageUrl">
+  </div>
 
-        <div class="form-group">
-          <label for="releaseDate">Release Date:</label>
- <input type="date" id="releaseDate">
-        </div>
+  <div class="form-group">
+  <label for="musicBy">Music By:</label>
+  <input type="text" id="musicBy">
+  </div>
 
-        <div class="form-group">
-          <label for="releaseYear">Release Year:</label>
- <input type="number" id="releaseYear">
-        </div>
+  <div class="form-group">
+  <label for="overviewImageUrl">Overview Image URL:</label>
+  <input type="url" id="overviewImageUrl">
+  </div>
 
- <div class="form-group">
-          <label for="stageTeaserUrl">Stage Teaser URL:</label>
- <input type="url" id="stageTeaserUrl">
-        </div>
+  <div class="form-group">
+  <label for="producer">Producer:</label>
+  <input type="text" id="producer">
+  </div>
 
-        <div class="form-group">
-          <label for="synopsis">Synopsis:</label>
- <textarea id="synopsis"></textarea>
-        </div>
+  <div class="form-group">
+  <label for="releaseDate">Release Date:</label>
+  <input type="date" id="releaseDate">
+  </div>
 
-        <div class="form-group">
-          <label for="trailerUrl">Trailer URL:</label>
- <input type="url" id="trailerUrl">
-        </div>
+  <div class="form-group">
+  <label for="releaseYear">Release Year:</label>
+  <input type="number" id="releaseYear">
+  </div>
 
-        <div class="form-group">
-        <label for="run-time">Run Time:</label>
-        <input type="text" id="run-time">
-        </div>
+  <div class="form-group">
+  <label for="stageTeaserUrl">Stage Teaser URL:</label>
+  <input type="url" id="stageTeaserUrl">
+  </div>
 
-        <div class="form-group">
-          <label for="platform">Platform:</label>
-          <input type="text" id="platform">
-          </div>
-        <div class="form-group">
-        <label for="rating">Rating:</label>
-        <input type="text" id="rating">
-        </div>    
+  <div class="form-group">
+  <label for="synopsis">Synopsis:</label>
+  <textarea id="synopsis"></textarea>
+  </div>
 
-        <div class="form-group">
-        <label for="category">Category:</label>
-        <select id="category">
-          <option value="marvel">Marvel</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-         <div class="form-group">
-        <label for="platform1">Type:</label>
-        <select id="platform1">
-          <option value="MOVIES">Movies</option>
-          <option value="TV SHOWS">Tv shows</option>
-        </select>
-        </div>
+  <div class="form-group">
+  <label for="trailerUrl">Trailer URL:</label>
+  <input type="url" id="trailerUrl">
+  </div>
 
-        <div class="form-group">
-        <label for="writtenBy">Written By:</label>
-        <input type="text" id="writtenBy">
-        </div>
+  <div class="form-group">
+  <label for="run-time">Run Time:</label>
+  <input type="text" id="run-time">
+  </div>
 
-        <button type="submit">Add Data</button>
-      </form>
-    </section>
+  <div class="form-group">
+  <label for="platform">Platform:</label>
+  <input type="text" id="platform">
+  </div>
 
-    <section class="admin-list-section">
-      <h2>Existing Data</h2>
-      <div id="dataList">
-      </div>
-    </section>
+  <div class="form-group">
+  <label for="rating">Rating:</label>
+  <input type="text" id="rating">
+  </div>    
+
+  <div class="form-group">
+  <label for="category">Category:</label>
+  <select id="category">
+  <option value="marvel">Marvel</option>
+  <option value="other">Other</option>
+  </select>
+  </div>
+  
+  <div class="form-group">
+  <label for="platform1">Type:</label>
+  <select id="platform1">
+  <option value="MOVIES">Movies</option>
+  <option value="TV SHOWS">Tv shows</option>
+  </select>
+  </div>
+
+  <div class="form-group">
+  <label for="writtenBy">Written By:</label>
+  <input type="text" id="writtenBy">
+  </div>
+
+  <button type="submit">Add Data</button>
+  </form>
+  </section>
+
+  <section class="admin-list-section">
+  <h2>Existing Data</h2>
+  <div id="dataList">
+  </div>
+  </section>
   </main>
 
   <footer class="footer">

@@ -391,6 +391,7 @@ body {
 .blog-card img {
     width: 100%;
     display: block;
+    max-height: 168px;
 }
 
 .blog-card h3 {

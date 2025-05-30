@@ -1,8 +1,6 @@
-// database-functions.js
-// database-functions.js
+
 import { db } from './firebase-config.js';
 
-// Function to fetch and display data from a Firestore collection
 async function fetchAndDisplayData(collectionName, containerElementId, displayFunction) {
   try {
     const container = document.getElementById(containerElementId);
@@ -17,7 +15,7 @@ async function fetchAndDisplayData(collectionName, containerElementId, displayFu
       return;
     }
 
-    container.innerHTML = ''; // Clear existing content
+    container.innerHTML = ''; 
     snapshot.forEach(doc => {
       const data = doc.data();
       displayFunction(data, container);
@@ -28,7 +26,6 @@ async function fetchAndDisplayData(collectionName, containerElementId, displayFu
   }
 }
 
-// Example display function for movies
 function displayMovie(movie, container) {
   const movieCard = document.createElement('div');
   movieCard.classList.add('movie-card');
@@ -40,7 +37,7 @@ function displayMovie(movie, container) {
   container.appendChild(movieCard);
 }
 
-// Example display function for news
+
 function displayNews(newsItem, container) {
   const newsCard = document.createElement('div');
   newsCard.classList.add('news-card');
@@ -50,7 +47,6 @@ function displayNews(newsItem, container) {
   container.appendChild(newsCard);
 }
 
-// Example display function for characters
 function displayCharacter(character, container) {
   const characterItem = document.createElement('div');
   characterItem.classList.add('character-item');
@@ -60,7 +56,6 @@ function displayCharacter(character, container) {
   container.appendChild(characterItem);
 }
 
-// Example display function for tv shows
 function displayTVShow(tvShow, container) {
   const tvShowCard = document.createElement('div');
   tvShowCard.classList.add('tvshow-card');
@@ -70,7 +65,6 @@ function displayTVShow(tvShow, container) {
   container.appendChild(tvShowCard);
 }
 
-// Function to add data to Firestore
 async function addData(collectionName, data) {
   try {
     await db.collection(collectionName).add(data);
@@ -80,7 +74,6 @@ async function addData(collectionName, data) {
   }
 }
 
-// Function to edit data in Firestore
 async function editData(collectionName, docId, data) {
     try {
         await db.collection(collectionName).doc(docId).update(data);
@@ -90,7 +83,6 @@ async function editData(collectionName, docId, data) {
     }
 }
 
-// Function to delete data from Firestore
 async function deleteData(collectionName, docId) {
     try {
         await db.collection(collectionName).doc(docId).delete();
